@@ -1,0 +1,8 @@
+.navbar.navbar-expand-lg.bg-primary {
+    background: rgb(22,146,170);
+    background: -moz-linear-gradient(90deg, rgba(22,146,170,1) 6%, rgba(0,255,175,1) 50%, rgba(22,146,170,1) 92%);
+    background: -webkit-linear-gradient(90deg, rgba(22,146,170,1) 6%, rgba(0,255,175,1) 50%, rgba(22,146,170,1) 92%);
+    background: linear-gradient(90deg, rgba(22,146,170,1) 6%, rgba(0,255,175,1) 50%, rgba(22,146,170,1) 92%);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#1692aa",endColorstr="#1692aa",GradientType=1);
+}
+

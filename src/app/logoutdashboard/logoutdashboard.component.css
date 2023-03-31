@@ -1,0 +1,28 @@
+i.fa-solid.fa-user-lock.fa-2xl,
+i.fa-brands.fa-linkedin.fa-2xl,
+i.fa-brands.fa-github.fa-2xl,
+i.fa-brands.fa-facebook.fa-2xl,
+i.fa-solid.fa-user.fa-2xl{
+    color: #ffff;
+}
+
+i.fa-brands.fa-facebook.fa-2xl:hover{
+color: rgb(47, 0, 255);
+}
+
+i.fa-brands.fa-github.fa-2xl:hover{
+color: rgb(0, 0, 0);
+}
+
+i.fa-brands.fa-linkedin.fa-2xl:hover{
+    color: rgba(7, 94, 207, 0.747)
+    }
+
+    i.fa-solid.fa-user-lock.fa-2xl:hover{
+        color: rgba(65, 231, 107, 0.747)
+    }
+
+    .list-group {
+        --bs-list-group-bg: none;
+        --bs-list-group-border-color:none;
+    }

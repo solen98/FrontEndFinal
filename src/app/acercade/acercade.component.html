@@ -1,0 +1,14 @@
+<!--Presentación-->
+<section class="presentacion mt-5">
+  <div class="container">
+    <div class="row" *ngFor="let sobremi of Acercade">
+      <div class="col-3">
+        <img [src]="sobremi.img"  alt="foto de perfil" class="rounded-circle img-fluid img-perfil mt-2">
+      </div>
+      <div class="col-9 mt-3">
+        <h3>Acerca de mí </h3>
+        <h5 class="mt-3" >{{sobremi.acercademi}}<br>{{sobremi.acercademi2}}<br>{{sobremi.acercademi3}}<br>{{sobremi.acercademi4}}</h5>
+      </div>
+    </div>
+  </div>
+  </section>

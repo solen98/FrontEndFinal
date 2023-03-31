@@ -1,0 +1,121 @@
+<!--MODAL REDES-->
+<div class="modal fade" id="redesModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModal">Redes sociales</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <ul class="list-group list-group-vertical">
+          <li class=" list-group-item"> <i class="fa-brands fa-facebook fa-2xl"> </i> 
+            <button type="button" class="btn btn-primary" data-bs-target="#editarRedModal" data-bs-toggle="modal" style="margin-right: 8px; margin-left: 30px;">
+              <i class="fa-solid fa-pen"></i>
+            </button>
+            <button type="button" class="btn btn-primary" >
+              <i class="fa-solid fa-trash"></i>
+            </button>
+          <li class=" list-group-item"> <i class="fa-brands fa-linkedin fa-2xl" > </i> 
+            <button type="button" class="btn btn-primary" data-bs-target="#editarRedModal" data-bs-toggle="modal" style="margin-right: 8px; margin-left: 34px;">
+              <i class="fa-solid fa-pen"></i>
+            </button>
+            <button type="button" class="btn btn-primary" >
+              <i class="fa-solid fa-trash"></i>
+            </button>
+          </li> 
+          <li class=" list-group-item"> <i class="fa-brands fa-github fa-2xl"> </i>
+            <button type="button" class="btn btn-primary" data-bs-target="#editarRedModal" data-bs-toggle="modal" style="margin-right: 8px; margin-left: 32px;">
+              <i class="fa-solid fa-pen"></i>
+            </button>
+            <button type="button" class="btn btn-primary" >
+              <i class="fa-solid fa-trash"></i>
+            </button>
+          </li> 
+        </ul>
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" data-bs-target="#agregarRedModal" data-bs-toggle="modal">
+          <i class="fa-solid fa-plus"></i>
+        </button>
+        <button type="button" class="btn btn-primary">Cerrar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- BOTÓN DE MODAL AGREGAR RED SOCIAL -->
+<div class="modal fade" id="agregarRedModal" tabindex="-1" aria-labelledby="agregarRedModalLabel2" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModal">Agregar red social</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <form [formGroup]="form"  (ngSubmit)="onEnviar($event)">   
+        <div class="modal-body">
+            <div class="mb-3 row">
+              <label for="exampleFormControlTextarea1" class="form-label">Link red social </label>
+                <div class="col-sm-10">
+                  <input class="form-control" formControlName="link" type="text" placeholder="https://ejemplo.com/" [class.border-danger]="linkValid" aria-label="default input example">
+                  <div *ngIf="link?.hasError && link?.touched">  
+                  <p *ngIf="link?.hasError('required')" class="error"> Debes ingresar un link.</p> 
+                </div>
+              </div>
+              </div>
+                  <div class="mb-3 row">
+                  <label for="exampleFormControlTextarea1" class="form-label mt-3">Icono (Fontawesome)</label>
+                  <div class="col-sm-10">
+                  <input class="form-control" formControlName="icono" type="text" placeholder="fa-group fa-icon" [class.border-danger]="iconoValid" aria-label="default input example">
+                  <div *ngIf="icono?.hasError && icono?.touched">  
+                    <p *ngIf="icono?.hasError('required')" class="error"> Debes ingresar un icono.</p> 
+                  </div>
+                </div>
+              </div>
+            </div>
+        <div class="modal-footer">
+          <button type="submit" class="btn btn-primary">Guardar</button>
+        </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+<!-- BOTÓN DE MODAL EDITAR RED SOCIAL -->
+<div class="modal fade" id="editarRedModal" tabindex="-1" aria-labelledby="editarRedModalLabel2" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModal">Editar red social</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <form [formGroup]="form"  (ngSubmit)="onEnviar($event)">   
+      <div class="modal-body">
+          <div class="mb-3 row">
+            <label for="exampleFormControlTextarea1" class="form-label">Link red social </label>
+              <div class="col-sm-10">
+                <input class="form-control" formControlName="link" type="text" placeholder="https://ejemplo.com/" [class.border-danger]="linkValid" aria-label="default input example">
+                <div *ngIf="link?.hasError && link?.touched">  
+                <p *ngIf="link?.hasError('required')" class="error"> Debes ingresar un link.</p> 
+              </div>
+            </div>
+            </div>
+                <div class="mb-3 row">
+                <label for="exampleFormControlTextarea1" class="form-label mt-3">Icono (Fontawesome)</label>
+                <div class="col-sm-10">
+                <input class="form-control" formControlName="icono" type="text" placeholder="fa-group fa-icon" [class.border-danger]="iconoValid" aria-label="default input example">
+                <div *ngIf="icono?.hasError && icono?.touched">  
+                  <p *ngIf="icono?.hasError('required')" class="error"> Debes ingresar un icono.</p> 
+                </div>
+              </div>
+            </div>
+          </div>
+      <div class="modal-footer">
+        <button type="submit" class="btn btn-primary">Guardar</button>
+      </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- BOTÓN DE MODAL ELIMINAR RED SOCIAL -->

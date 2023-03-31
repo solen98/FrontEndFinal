@@ -1,0 +1,23 @@
+.card {
+    width: 20%;
+    height: 45vh;
+}
+
+.card-body {
+    color: rgb(250, 241, 241);
+    background-color: rgb(74, 196, 175);
+}
+
+section.proyectos {
+    margin-left: 4rem;
+    margin-right: 4rem;
+    margin-bottom: 4rem;
+}
+
+.card-title {
+    color: rgb(119, 252, 148);
+}
+
+.card-title {
+    color: rgb(119, 252, 148);
+}

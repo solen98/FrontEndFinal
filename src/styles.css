@@ -1,1 +1,29 @@
-/* You can add global styles to this file, and also import other style files */
+
+  body{
+    background-color: rgb(35, 189, 140);
+}
+
+h3{
+  color: rgb(119, 252, 148);
+}
+
+h6 {
+  color: #ffff;
+}
+
+hr {
+  margin-top: 5rem;
+  border-top: 10px solid #fffffffb;
+}
+
+hr.especial{
+  margin-top: 15rem;
+}
+
+h1{
+  padding-top: 20%;
+  font-size: 4rem;
+}
+  
+
+  

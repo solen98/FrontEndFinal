@@ -1,0 +1,151 @@
+<!--MODAL PORTFOLIO-->
+<div class="modal fade" id="portfolioModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModal">Proyectos</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+
+        <div class="modal-body"> 
+          <div class="row">
+            <div class="col-6">
+              <div class="carta">
+                <div class="card-body">
+                  <h5 class="card-title">Proyecto Integrador Portfolio Web Full Stack</h5>
+                  <p class="card-text">Diseño de aplicación web full stack. Creación de un portfolio web - Año 2022 - Argentina Programa </p>
+                 <div class="d-flex justify-content-center my-3">
+                  <button type="button" class="btn btn-primary" data-bs-target="#editarProyectoModal" data-bs-toggle="modal" style="margin-right: 8px; margin-top: 25px;">
+                    <i class="fa-solid fa-pen"></i> </button>
+                    <button type="button" class="btn btn-primary" style="margin-right: 8px; margin-top: 25px;" >
+                      <i class="fa-solid fa-trash"></i>
+                    </button>
+                    </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-6">
+              <div class="carta">
+                <div class="card-body">
+                  <h5 class="card-title"> Anteproyecto sobre E-commerce - Diseño Interactivo</h5>
+                  <p class="card-text"> Creación de una propuesta para el armado de un sitio web - Año 2020 - Universidad Siglo 21</p>
+                  <div class="d-flex justify-content-center">
+                  <button type="button" class="btn btn-primary" data-bs-target="#editarProyectoModal" data-bs-toggle="modal" style="margin-right: 8px">
+                    <i class="fa-solid fa-pen"></i> </button>
+                    <button type="button" class="btn btn-primary" style="margin-right: 8px">
+                      <i class="fa-solid fa-trash"></i>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="modal-footer">
+          <button class="btn btn-primary" data-bs-target="#agregarProyectoModal" data-bs-toggle="modal">
+            <i class="fa-solid fa-plus"></i>
+          </button>
+          <button type="button" class="btn btn-primary">Cerrar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<!-- BOTÓN DE MODAL AGREGAR PROYECTO -->
+    <div class="modal fade" id="agregarProyectoModal" tabindex="-1" aria-labelledby="agregarProyectoModal" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModal">Agregar proyecto</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <form [formGroup]="form"  (ngSubmit)="onEnviar($event)">   
+        <div class="modal-body">
+            <div class="mb-3 row">
+              <label for="exampleFormControlTextarea1" class="form-label">Título</label>
+              <div class="col-sm-10">
+                <input class="form-control" formControlName="titulo" type="text" placeholder="Título proyecto" [class.border-danger]="tituloValid" aria-label="default input example">
+                <div *ngIf="titulo?.hasError && titulo?.touched">  
+                  <p *ngIf="titulo?.hasError('required')" class="error"> Debes ingresar un título.</p> 
+                  <p *ngIf="titulo?.hasError('maxlength')" class="error"> El límite máximo es de 40 caracteres. </p>
+                </div>
+              </div>
+            </div>
+              <div class="mb-3 row">
+                <label for="exampleFormControlTextarea1" class="form-label mt-3">Descripción</label>
+                <div class="col-sm-10">
+                <textarea class="form-control" formControlName="descripcion" placeholder="Descripción proyecto"  [class.border-danger]="descripcionValid" id="floatingTextarea"></textarea>
+                  <div *ngIf="descripcion?.hasError && descripcion?.touched">  
+                    <p *ngIf="descripcion?.hasError('required')" class="error"> Debes ingresar una descripción.</p> 
+                    <p *ngIf="descripcion?.hasError('maxlength')" class="error"> El límite máximo es de 100 caracteres. </p>
+                  </div>
+              </div>
+            </div>
+            <div class="mb-3 row">
+                <label for="exampleFormControlTextarea1" class="form-label mt-3">Link</label>
+                <div class="col-sm-10">
+                <input class="form-control" formControlName="link" type="text" placeholder="https://LinkProyecto.com" [class.border-danger]="linkValid" aria-label="default input example">
+                <div *ngIf="link?.hasError && link?.touched">  
+                  <p *ngIf="link?.hasError('required')" class="error"> Debes ingresar un link.</p> 
+                </div>
+              </div>
+            </div>
+            </div>
+        <div class="modal-footer">
+          <button type="submit" class="btn btn-primary">Guardar</button>
+        </div>
+      </form>
+      </div>
+    </div>
+  </div>
+
+<!-- BOTÓN DE MODAL EDITAR PROYECTO -->  
+<div class="modal fade" id="editarProyectoModal" tabindex="-1" aria-labelledby="editarProyectoModal" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModal">Editar proyecto</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <form [formGroup]="form"  (ngSubmit)="onEnviar($event)">   
+      <div class="modal-body">
+          <div class="mb-3 row">
+            <label for="exampleFormControlTextarea1" class="form-label">Título</label>
+            <div class="col-sm-10">
+              <input class="form-control" formControlName="titulo" type="text" placeholder="Título proyecto" [class.border-danger]="tituloValid" aria-label="default input example">
+              <div *ngIf="titulo?.hasError && titulo?.touched">  
+                <p *ngIf="titulo?.hasError('required')" class="error"> Debes ingresar un título.</p> 
+                <p *ngIf="titulo?.hasError('maxlength')" class="error"> El límite máximo es de 40 caracteres. </p>
+              </div>
+            </div>
+          </div>
+            <div class="mb-3 row">
+              <label for="exampleFormControlTextarea1" class="form-label mt-3">Descripción</label>
+              <div class="col-sm-10">
+              <textarea class="form-control" formControlName="descripcion" placeholder="Descripción proyecto"  [class.border-danger]="descripcionValid" id="floatingTextarea"></textarea>
+                <div *ngIf="descripcion?.hasError && descripcion?.touched">  
+                  <p *ngIf="descripcion?.hasError('required')" class="error"> Debes ingresar una descripción.</p> 
+                  <p *ngIf="descripcion?.hasError('maxlength')" class="error"> El límite máximo es de 100 caracteres. </p>
+                </div>
+            </div>
+          </div>
+          <div class="mb-3 row">
+              <label for="exampleFormControlTextarea1" class="form-label mt-3">Link</label>
+              <div class="col-sm-10">
+              <input class="form-control" formControlName="link" type="text" placeholder="https://LinkProyecto.com" [class.border-danger]="linkValid" aria-label="default input example">
+              <div *ngIf="link?.hasError && link?.touched">  
+                <p *ngIf="link?.hasError('required')" class="error"> Debes ingresar un link.</p> 
+              </div>
+            </div>
+          </div>
+          </div>
+      <div class="modal-footer">
+        <button type="submit" class="btn btn-primary">Guardar</button>
+      </div>
+    </form>
+    </div>
+  </div>
+</div>
+
+  <!-- BOTÓN DE MODAL ELIMINAR PROYECTO -->  

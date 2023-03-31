@@ -1,0 +1,187 @@
+<!--MODAL EXPERIENCIA-->
+<div class="modal fade" id="workModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModal">Experiencia</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <div class="col 4">
+            <div class="card" style="width: 8rem; height: 20rem">
+              <img src="assets/img/¿QUIENES SOMOS (1).png" class="card-img-top" style="width: 8rem" alt="MOBIUS">
+              <div class="card-body">
+                <h4 class="card-title"> TÍTULO </h4>
+                <h6> SUBTÍTULO </h6>
+                <p class="card-text"> <p> Descripción </p>
+                <button type="button" class="btn btn-primary"  data-bs-target="#editarExpModal" data-bs-toggle="modal"  style="margin-right: 8px;">
+                  <i class="fa-solid fa-pen"></i>
+                </button>
+                <button type="button" class="btn btn-primary"  >
+                  <i class="fa-solid fa-trash"></i>
+                </button>
+              </div>
+            </div> 
+        </div>
+        <div class="col 4">
+          <div class="card" style="width: 8rem; height: 20rem">
+            <img src="assets/img/socialup.png"class="card-img-top" style="width: 8rem" alt="logo empresa1">
+            <div class="card-body">
+              <h4 class="card-title">TÍTULO</h4>
+              <h6> SUBTITULO </h6>
+              <p class="card-text"> <p> Descripción </p>
+              <button type="button" class="btn btn-primary" data-bs-target="#editarExpModal" data-bs-toggle="modal" style="margin-right: 8px;">
+              <i class="fa-solid fa-pen"></i>
+            </button>
+              <button type="button" class="btn btn-primary" >
+                <i class="fa-solid fa-trash"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+          <div class="col 4">
+            <div class="card" style="width: 8rem; height: 20rem">
+              <img src="assets/img/LAS GIOVANAS LOGO (1).png" class="card-img-top" style="width: 8rem" alt="Giovannas logo">
+              <div class="card-body">
+                <h4 class="card-title" >TITULO </h4>
+                <h6> SUBTITULO </h6>
+                <p class="card-text"> <p> Descripción </p>
+                <button type="button" class="btn btn-primary"  data-bs-target="#editarExpModal" data-bs-toggle="modal"  style="margin-right: 8px;">
+                  <i class="fa-solid fa-pen"></i>
+                </button>
+                <button type="button" class="btn btn-primary" >
+                  <i class="fa-solid fa-trash"></i>
+                </button>
+                </div>
+              </div>
+            </div>
+          </div>
+            </div>
+      <div class="modal-footer">
+          <button type="button" class="btn btn-primary" data-bs-target="#agregarModal" data-bs-toggle="modal">
+          <i class="fa-solid fa-plus"></i>
+        </button>
+        <button type="button" class="btn btn-primary" data-bs-dismiss="modal" aria-label="Close">Cerrar</button>
+      </div>
+      </div>
+    </div>
+  </div>
+      
+<!-- BOTÓN DE MODAL AGREGAR EXPERIENCIA -->
+<div class="modal fade" id="agregarModal" tabindex="-1" aria-labelledby="agregarModalLabel2" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModal">Agregar Experiencia</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <form [formGroup]="form"  (ngSubmit)="onEnviar($event)">   
+      <div class="modal-body">
+          <div class="mb-3 row">
+            <label for="formFile" class="form-label">Imagen</label>
+              <div class="col-sm-10">
+                <input type="img" class="form-control" formControlName="img"  placeholder="Imagen Empresa" [class.border-danger]="ImgValid" id="exampleInputEmail1" aria-label="default input example">
+                <div *ngIf="Img?.errors && Img?.touched">    
+                  <p *ngIf="Img?.hasError('required')" class="error">Debes ingresar una imagen.</p>
+              </div>
+              </div>
+            </div>
+              <div class="mb-3 row">
+                <label for="exampleFormControlTextarea1" class="form-label">Título</label>
+                <div class="col-sm-10">
+                  <input class="form-control" type="titulo" formControlName="titulo" placeholder="Título" [class.border-danger]="tituloValid" id="exampleInputEmail1"aria-label="default input example">
+                  <div *ngIf="titulo?.hasError && titulo?.touched">  
+                    <p *ngIf="titulo?.hasError('required')" class="error"> Debes ingresar un título.</p> 
+                    <p *ngIf="titulo?.hasError('maxlength')" class="error"> El límite máximo es de 40 caracteres. </p>
+              </div>
+            </div>
+          </div>
+            <div class="mb-3 row">
+              <label for="exampleFormControlTextarea1" class="form-label">Subtítulo</label>
+              <div class="col-sm-10">
+                <input class="form-control" type="subtitulo" formControlName="subtitulo" placeholder="Subtítulo" [class.border-danger]="subtituloValid" id="exampleInputEmail1"aria-label="default input example">
+                <div *ngIf="subtitulo?.hasError && subtitulo?.touched">  
+                  <p *ngIf="subtitulo?.hasError('required')" class="error"> Debes ingresar un subtítulo.</p> 
+                  <p *ngIf="subtitulo?.hasError('maxlength')" class="error"> El límite máximo es de 50 caracteres. </p>
+            </div>
+          </div>
+        </div>
+        <div class="mb-3 row">
+          <label for="exampleFormControlTextarea1" class="form-label">Descripción</label>
+          <div class="col-sm-10">
+            <textarea class="form-control" type="descripcion" formControlName="descripcion" placeholder="Descripción" [class.border-danger]="descripcionValid" id="floatingTextarea" aria-label="default input example"></textarea>
+            <div *ngIf="descripcion?.hasError && descripcion?.touched">  
+              <p *ngIf="descripcion?.hasError('required')" class="error"> Debes ingresar una descripción.</p> 
+              <p *ngIf="descripcion?.hasError('minlength')" class="error"> Debes ingresar un mínimo de 20 caracteres. </p>
+              <p *ngIf="descripcion?.hasError('maxlength')" class="error"> El límite máximo es de 80 caracteres. </p>
+        </div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button type="submit" class="btn btn-primary">Guardar</button>
+    </div>
+</div>
+  </form>
+  </div>
+</div>
+</div>
+
+<!-- BOTÓN DE MODAL EDITAR EXPERIENCIA -->
+<div class="modal fade" id="editarExpModal" tabindex="-1" aria-labelledby="editarExpModalLabel2" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModal">Editar Experiencia</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <form [formGroup]="form"  (ngSubmit)="onEnviar($event)">   
+      <div class="modal-body">
+          <div class="mb-3 row">
+            <label for="formFile" class="form-label">Imagen</label>
+              <div class="col-sm-10">
+                <input type="img" class="form-control" formControlName="img"  placeholder="Imagen Empresa" [class.border-danger]="ImgValid" id="exampleInputEmail1" aria-label="default input example">
+                <div *ngIf="Img?.errors && Img?.touched">    
+                  <p *ngIf="Img?.hasError('required')" class="error">Debes ingresar una imagen.</p>
+              </div>
+              </div>
+            </div>
+              <div class="mb-3 row">
+                <label for="exampleFormControlTextarea1" class="form-label">Título</label>
+                <div class="col-sm-10">
+                  <input class="form-control" type="titulo" formControlName="titulo" placeholder="Título" [class.border-danger]="tituloValid" id="exampleInputEmail1"aria-label="default input example">
+                  <div *ngIf="titulo?.hasError && titulo?.touched">  
+                    <p *ngIf="titulo?.hasError('required')" class="error"> Debes ingresar un título.</p> 
+                    <p *ngIf="titulo?.hasError('maxlength')" class="error"> El límite máximo es de 40 caracteres. </p>
+              </div>
+            </div>
+          </div>
+            <div class="mb-3 row">
+              <label for="exampleFormControlTextarea1" class="form-label">Subtítulo</label>
+              <div class="col-sm-10">
+                <input class="form-control" type="subtitulo" formControlName="subtitulo" placeholder="Subtítulo" [class.border-danger]="subtituloValid" id="exampleInputEmail1"aria-label="default input example">
+                <div *ngIf="subtitulo?.hasError && subtitulo?.touched">  
+                  <p *ngIf="subtitulo?.hasError('required')" class="error"> Debes ingresar un subtítulo.</p> 
+                  <p *ngIf="subtitulo?.hasError('maxlength')" class="error"> El límite máximo es de 50 caracteres. </p>
+            </div>
+          </div>
+        </div>
+          <div class="mb-3 row">
+            <label for="exampleFormControlTextarea1" class="form-label">Descripción</label>
+            <div class="col-sm-10">
+              <textarea class="form-control" type="descripcion" formControlName="descripcion" placeholder="Descripción" [class.border-danger]="descripcionValid" id="floatingTextarea" aria-label="default input example"></textarea>
+              <div *ngIf="descripcion?.hasError && descripcion?.touched">  
+                <p *ngIf="descripcion?.hasError('required')" class="error"> Debes ingresar una descripción.</p> 
+                <p *ngIf="descripcion?.hasError('minlength')" class="error"> Debes ingresar un mínimo de 20 caracteres. </p>
+                <p *ngIf="descripcion?.hasError('maxlength')" class="error"> El límite máximo es de 80 caracteres. </p>
+              </div>
+              </div>
+            </div>
+      <div class="modal-footer">
+        <button type="submit" class="btn btn-primary">Guardar</button>
+      </div>
+  </div>
+    </form>
+    </div>
+  </div>
+</div>

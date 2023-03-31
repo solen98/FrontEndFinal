@@ -1,0 +1,180 @@
+{
+"Banner":[ 
+  {
+    "nombre": "Natali Soledad Del Valle",
+    "profesion": "Programadora Full Stack"
+  }
+],
+
+  "Redes":[ 
+    {
+      "id": 0,
+      "link": "https://www.linkedin.com/in/soledad-del-valle-natali-05617513b/",
+      "icono": "fa-brands fa-linkedin fa-2xl"
+    },
+    {
+      "id": 1,
+      "link": "https://www.facebook.com/soledad.natali.5",
+      "icono": "fa-brands fa-facebook fa-2xl"
+    },
+    {
+      "id": 2,
+      "link": "https://github.com/solen98",
+      "icono": "fa-brands fa-github fa-2xl"
+    }
+  ],
+
+"Acercade":[
+  {
+    "img":"../assets/img/fotoperfil.png",
+    "acercademi": "Soy publicista, recibida en la Universidad Siglo 21. Sumergida en el rubro de la comunicación de marcas vía redes sociales.",
+    "acercademi2": "Mi trayecto universitario me ayudó a exprimir mis capacidades para desarollar mensajes adaptados a los intereses del público objetivo de las empresas.",
+    "acercademi3": "Soy creativa y estratégica, apasionada por la redacción, me gusta estar actualizada con las novedades y consumo todo tipo de contenido para cada día mejorar mis conocimientos.",
+    "acercademi4": "Me considero una persona proactiva, responsable, con ganas de aprender y suspearme.  Actualmente me encuentro incursionando en el mundo de la programación."
+  }
+],
+    "Educacion": [
+      {
+         "id": 0,
+         "titulo": "Curso Community Manager Real Experiencie - Rúcula Digital Academy",
+         "img": "/assets/img/certificadorucula.png",
+         "width":"20",
+         "height": "20"
+      },
+      {
+         "id": 1,
+         "titulo": "Curso #SéProgramar - Argentina Programa",
+         "img": "/assets/img/certificadoprogramacion.png",
+         "width":"20",
+         "height": "22"
+      },
+      {
+         "id": 2,
+         "titulo": " Curso de SEO y Monetización Web - BigSEO Academy",
+         "img": "../assets/img/certificado SEO.png",
+         "width":"20",
+         "height": "20"
+      }
+    ],
+
+    "Experiencia": [
+        {
+            "id": 0,
+            "titulo": "MOBIUS",
+            "subtitulo": "ESPACIO TERAPÉUTICO",
+            "descripcion": "Community Manager Freelance: creación de las redes sociales; comunicación con el cliente; planificación, redacción,  diseño y publicación del contenido; atención al públicos y análisis de la cuenta (métricas y reportes).",
+            "width":"20",
+            "height": "28",
+            "img": "/assets/img/¿QUIENES SOMOS (1).png"
+         },
+         {
+            "id": 1,
+            "titulo": "SOCIAL UP",
+            "subtitulo": "AGENCIA DE COMUNICACIÓN",
+            "descripcion": "Puesto de Community Manager: comunicación con el cliente, planificación de contenido, pedidos de diseño a los diseñadores, redacción, publicación de posteos, atención al público y análisis de las cuentas (métricas y reportes).",
+            "width":"20",
+            "height": "28",
+            "img": "/assets/img/socialup.png"
+         },
+         {
+            "id": 2,
+            "titulo": "LAS GIOVANNAS'C",
+            "subtitulo": "TIENDA DE ROPA",
+            "descripcion": "Community Manager Freelance: creación de las redes sociales; comunicación con el cliente; planificación, redacción,  diseño y publicación del contenido; atención al públicos y análisis de la cuenta (métricas y reportes).",
+            "width":"20",
+            "height": "28",
+            "img": "/assets/img/LAS GIOVANAS LOGO (1).png"
+         }
+      ],
+
+      "HardSkills": [
+         {
+             "id": 0,
+             "titulo": "Diseño UX - UI",
+             "Porcentaje": "50"
+          },
+          {
+            "id": 1,
+            "titulo": "SOCIAL MEDIA ADS",
+            "Porcentaje": "80"
+          },
+          {
+            "id": 2,
+            "titulo": "IDIOMAS (español - portugués - inglés)",
+            "Porcentaje": "70"
+          },
+          {
+            "id": 3,
+            "titulo": "PAQUETE ADOBE",
+            "Porcentaje": "35"
+          },
+          {
+            "id": 4,
+            "titulo": "HTML",
+            "Porcentaje": "20"
+          },
+          {
+            "id": 5,
+            "titulo": "CSS",
+            "Porcentaje": "15"
+          },
+          {
+            "id": 6,
+            "titulo": "REDACCIÓN SEO Y SEM",
+            "Porcentaje": "80"
+          }
+       ],
+
+       "SoftSkills": [
+         {
+             "id": 0,
+             "titulo": "CREATIVIDAD",
+             "Porcentaje": "70"
+          },
+          {
+            "id": 1,
+            "titulo": "TRABAJO EN EQUIPO",
+            "Porcentaje": "90"
+          },
+          {
+            "id": 2,
+            "titulo": "PROACTIVIDAD",
+            "Porcentaje": "100"
+          },
+          {
+            "id": 3,
+            "titulo": "VERSATIBILIDAD",
+            "Porcentaje": "95"
+          },
+          {
+            "id": 4,
+            "titulo": "CAPACIDAD DE RESOLVER PROBLEMAS",
+            "Porcentaje": "85"
+          },
+          {
+            "id": 5,
+            "titulo": "APRENDIZAJE CONSTANTE",
+            "Porcentaje": "100"
+          },
+          {
+            "id": 6,
+            "titulo": "GESTIÓN DEL TIEMPO",
+            "Porcentaje": "80"
+          }
+       ],
+
+       "Proyectos": [
+         {
+            "id": 0,
+            "titulo": "Proyecto Integrador Portfolio Web Full Stack",
+            "descripcion": "Diseño de aplicación web full stack. Creación de un portfolio web - Año 2022 - Argentina Programa",
+            "link": "http://127.0.0.1:5500/NUEVO%20PROYECTO/frontend/index.html"
+          },
+          {
+            "id": 1,
+            "titulo": "Anteproyecto sobre E-commerce - Diseño Interactivo",
+            "descripcion": "Creación de una propuesta para el armado de un sitio web - Año 2020 - Universidad Siglo 21",
+            "link": "https://drive.google.com/drive/folders/10MruN35CVdxSFidwrccZ7JOzusjn-wcO?usp=sharing"
+          }
+       ]
+      }

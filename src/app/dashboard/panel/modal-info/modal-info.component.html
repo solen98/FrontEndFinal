@@ -1,0 +1,97 @@
+<!--MODAL ACERCADE-->
+<div class="modal fade" id="infoModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModal">Información</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div class="mb-3 row">
+                <div class="col-3 mt-5">
+                  <section class="fotoperfil">
+                  <img src="assets/img/fotoperfil.png" alt="foto de perfil" class="rounded-circle img-fluid img-perfil mt-2">
+                </section>
+                </div>
+                <div class="col-9 mt-3">
+                <p> Soy publicista, recibida en la Universidad Siglo 21. Sumergida en el rubro de la comunicación de marcas vía redes sociales. Mi trayecto universitario me ayudó a exprimir mis capacidades para desarollar mensajes adaptados a los intereses del público objetivo de las empresas. Soy creativa y estratégica, apasionada por la redacción, me gusta estar actualizada con las novedades y consumo todo tipo de contenido para cada día mejorar mis conocimientos. <br> Me considero una persona proactiva, responsable, con ganas de aprender y suspearme. Actualmente me encuentro incursionando en el mundo de la programación.</p> 
+          </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary" data-bs-target="#editarAcercadeModal" data-bs-toggle="modal">
+            <i class="fa-solid fa-pen"></i>
+          </button>
+          <button type="button" class="btn btn-primary" data-bs-dismiss="modal" aria-label="Close">Cerrar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+<!--MODAL EDITAR ACERCADE-->
+<div class="modal fade" id="editarAcercadeModal" tabindex="-1" aria-labelledby="editarAcercadeModalLabel2" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModal">Editar Información</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <form [formGroup]="form"  (ngSubmit)="onEnviar($event)"> 
+        <div class="modal-body">
+          <div class="mb-3 row">
+            <label for="exampleFormControlTextarea1" class="form-label">Imagen</label>
+            <div class="col-sm-10">
+              <input type="text" class="form-control" formControlName="Img" placeholder="Imagen perfil" [class.border-danger]="ImgValid" id="exampleInputEmail1" aria-label="default input example">
+              <div *ngIf="Img?.errors && Img?.touched">    
+                <p *ngIf="Img?.hasError('required')" class="error"> Debes ingresar una imagen.</p>
+            </div>
+            </div>
+          </div>   
+          <div class="mb-3 row">
+            <label for="exampleFormControlTextarea1" class="form-label">Párrafo 1</label>
+              <div class="col-sm-10">
+                <input class="form-control" formControlName="acercademi" type="text" placeholder="Descripción 1" [class.border-danger]="acercademiValid" id="exampleInputEmail1" aria-label="default input example">
+                <div *ngIf="acercademi?.errors && acercademi?.touched">    
+                  <p *ngIf="acercademi?.hasError('required')" class="error"> Debes ingresar una descripción.</p>
+                  <p *ngIf="acercademi?.hasError('maxlength')" class="error">El límite máximo es de 200 caracteres.</p>
+              </div>
+            </div>
+            </div>
+              <div class="mb-3 row">
+                <label for="exampleFormControlTextarea1" class="form-label">Párrafo 2</label>
+                <div class="col-sm-10">
+                  <input class="form-control" formControlName="acercademi2" type="text" placeholder="Descripción 2" [class.border-danger]="acercademi2Valid" id="exampleInputEmail1" aria-label="default input example">
+                  <div *ngIf="acercademi2?.errors && acercademi2?.touched">    
+                    <p *ngIf="acercademi2?.hasError('required')" class="error"> Debes ingresar una descripción.</p>
+                    <p *ngIf="acercademi2?.hasError('maxlength')" class="error">El límite máximo es de 200 caracteres.</p>
+                </div>
+              </div>
+              </div>
+              <div class="mb-3 row">
+                <label for="exampleFormControlTextarea1" class="form-label">Párrafo 3</label>
+                <div class="col-sm-10">
+                  <input class="form-control" formControlName="acercademi3" type="text" placeholder="Descripción 3" [class.border-danger]="acercademi3Valid" id="exampleInputEmail1" aria-label="default input example">
+                  <div *ngIf="acercademi3?.errors && acercademi3?.touched">    
+                    <p *ngIf="acercademi3?.hasError('required')" class="error"> Debes ingresar una descripción.</p>
+                    <p *ngIf="acercademi3?.hasError('maxlength')" class="error">El límite máximo es de 200 caracteres.</p>
+                </div>
+              </div>
+              </div>    
+              <div class="mb-3 row">
+                <label for="exampleFormControlTextarea1" class="form-label">Párrafo 4</label>
+                <div class="col-sm-10">
+                  <input class="form-control" formControlName="acercademi4" type="text" placeholder="Descripción 4" [class.border-danger]="acercademi4Valid" id="exampleInputEmail1" aria-label="default input example">
+                  <div *ngIf="acercademi4?.errors && acercademi4?.touched">    
+                    <p *ngIf="acercademi4?.hasError('required')" class="error"> Debes ingresar una descripción.</p>
+                    <p *ngIf="acercademi4?.hasError('maxlength')" class="error">El límite máximo es de 200 caracteres.</p>
+                </div>
+              </div>
+              </div>    
+      </div>
+        <div class="modal-footer">
+          <button type="submit" class="btn btn-primary">Guardar</button>
+        </div>  
+      </form>
+      </div>
+    </div>
+  </div>

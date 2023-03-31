@@ -1,0 +1,19 @@
+.banner{
+    position: relative;
+    display: inline-block;
+    text-align: center;
+}
+
+.NombreyApellido{
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+}
+
+.Profesion{
+    position: absolute;
+        top: 70%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+}

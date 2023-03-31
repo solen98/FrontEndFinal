@@ -1,0 +1,36 @@
+section.skillss{
+    margin-top: 2rem;
+    margin-left: 5rem;
+    margin-right: 5rem;
+}
+
+section.skillsh{
+    margin-top: 10rem;
+    margin-left: 5rem;
+    margin-right: 5rem;
+}
+
+section.skillsh{
+    margin-top: 1rem;
+    margin-left: 5rem;
+    margin-right: 5rem;
+}
+
+.progress-bar{
+ background-color: rgba(22,146,170,1);
+}
+
+.hardkills {
+    border-color: aliceblue;
+    border-style: dashed;
+}
+
+.hardkills{
+    margin-top: 10rem;
+}
+
+
+.softskills{
+    border-color: aliceblue;
+    border-style: dashed;
+}
