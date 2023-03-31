@@ -156,6 +156,7 @@
         <h5 class="modal-title">Eliminar proyecto</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
+      <form [formGroup]="form" (ngSubmit)="onRespuesta($event)"> 
       <div class="modal-body">
         <p>¿Seguro/a que quieres eliminar este proyecto?</p>
       </div>
@@ -163,6 +164,7 @@
         <button type="submit" class="btn btn-primary">Si</button>
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"> No </button>
       </div>
+      </form>
     </div>
   </div>
 </div>

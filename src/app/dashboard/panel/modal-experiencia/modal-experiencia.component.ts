@@ -70,8 +70,15 @@ export class ModalExperienciaComponent implements OnInit {
       this.form.markAllAsTouched();
       alert("¡COMPLETA LOS DATOS!")
     }
- 
+
   }
 
-
-}
+  onRespuesta(event: Event){
+    // Detenemos la propagación o ejecución del compotamiento submit de un form
+    event.preventDefault; 
+  
+      // Llamamos a nuestro servicio para enviar los datos al servidor
+      // También podríamos ejecutar alguna lógica extra
+      alert("¡Sección eliminada!")
+  }
+  }
