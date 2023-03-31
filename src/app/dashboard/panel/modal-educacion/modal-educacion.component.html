@@ -18,7 +18,7 @@
                   <button type="button" class="btn btn-primary" data-bs-target="#editarEducacion" data-bs-toggle="modal" style="margin-right: 8px;">
                     <i class="fa-solid fa-pen"></i>
                   </button>
-                  <button type="button" class="btn btn-primary"  >
+                  <button type="button" class="btn btn-primary" data-bs-target="#eliminarEducacion" data-bs-toggle="modal" >
                     <i class="fa-solid fa-trash"></i>
                   </button>
                 </div>
@@ -34,7 +34,7 @@
                 <button type="button" class="btn btn-primary" data-bs-target="#editarEducacion" data-bs-toggle="modal" style="margin-right: 8px;">
                 <i class="fa-solid fa-pen"></i>
               </button>
-                <button type="button" class="btn btn-primary" >
+                <button type="button" class="btn btn-primary" data-bs-target="#eliminarEducacion" data-bs-toggle="modal" >
                   <i class="fa-solid fa-trash"></i>
                 </button>
               </div>
@@ -50,7 +50,7 @@
                   <button type="button" class="btn btn-primary" data-bs-target="#editarEducacion" data-bs-toggle="modal"style="margin-right: 8px;">
                     <i class="fa-solid fa-pen"></i>
                   </button>
-                  <button type="button" class="btn btn-primary" >
+                  <button type="button" class="btn btn-primary" data-bs-target="#eliminarEducacion" data-bs-toggle="modal" >
                     <i class="fa-solid fa-trash"></i>
                   </button>
                 </div>
@@ -149,3 +149,22 @@
       </div>
     </div>
   </div>
+
+  <!-- BOTÓN DE MODAL ELIMINAR EDUCACION -->
+ <div class="modal fade" id="eliminarEducacion" tabindex="-1" aria-labelledby="eliminarEducacionLabel2" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Eliminar educación</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <p>¿Seguro/a que quieres eliminar esta educación?</p>
+      </div>
+      <div class="modal-footer">
+        <button type="submit" class="btn btn-primary">Si</button>
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"> No </button>
+      </div>
+    </div>
+  </div>
+</div>

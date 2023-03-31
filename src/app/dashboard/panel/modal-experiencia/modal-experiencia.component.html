@@ -18,7 +18,7 @@
                 <button type="button" class="btn btn-primary"  data-bs-target="#editarExpModal" data-bs-toggle="modal"  style="margin-right: 8px;">
                   <i class="fa-solid fa-pen"></i>
                 </button>
-                <button type="button" class="btn btn-primary"  >
+                <button type="button" class="btn btn-primary" data-bs-target="#eliminarExperiencia" data-bs-toggle="modal">
                   <i class="fa-solid fa-trash"></i>
                 </button>
               </div>
@@ -34,7 +34,7 @@
               <button type="button" class="btn btn-primary" data-bs-target="#editarExpModal" data-bs-toggle="modal" style="margin-right: 8px;">
               <i class="fa-solid fa-pen"></i>
             </button>
-              <button type="button" class="btn btn-primary" >
+              <button type="button" class="btn btn-primary" data-bs-target="#eliminarExperiencia" data-bs-toggle="modal">
                 <i class="fa-solid fa-trash"></i>
               </button>
             </div>
@@ -50,7 +50,7 @@
                 <button type="button" class="btn btn-primary"  data-bs-target="#editarExpModal" data-bs-toggle="modal"  style="margin-right: 8px;">
                   <i class="fa-solid fa-pen"></i>
                 </button>
-                <button type="button" class="btn btn-primary" >
+                <button type="button" class="btn btn-primary" data-bs-target="#eliminarExperiencia" data-bs-toggle="modal"  >
                   <i class="fa-solid fa-trash"></i>
                 </button>
                 </div>
@@ -182,6 +182,25 @@
       </div>
   </div>
     </form>
+    </div>
+  </div>
+</div>
+
+ <!-- BOTÓN DE MODAL ELIMINAR EXPERIENCIA -->
+ <div class="modal fade" id="eliminarExperiencia" tabindex="-1" aria-labelledby="eliminarExperienciaLabel2" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Eliminar experiencia</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <p>¿Seguro/a que quieres eliminar esta experiencia?</p>
+      </div>
+      <div class="modal-footer">
+        <button type="submit" class="btn btn-primary">Si</button>
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"> No </button>
+      </div>
     </div>
   </div>
 </div>

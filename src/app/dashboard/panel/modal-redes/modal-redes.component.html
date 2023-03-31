@@ -12,14 +12,14 @@
             <button type="button" class="btn btn-primary" data-bs-target="#editarRedModal" data-bs-toggle="modal" style="margin-right: 8px; margin-left: 30px;">
               <i class="fa-solid fa-pen"></i>
             </button>
-            <button type="button" class="btn btn-primary" >
+            <button type="button" class="btn btn-primary" data-bs-target="#eliminarRed" data-bs-toggle="modal">
               <i class="fa-solid fa-trash"></i>
             </button>
           <li class=" list-group-item"> <i class="fa-brands fa-linkedin fa-2xl" > </i> 
             <button type="button" class="btn btn-primary" data-bs-target="#editarRedModal" data-bs-toggle="modal" style="margin-right: 8px; margin-left: 34px;">
               <i class="fa-solid fa-pen"></i>
             </button>
-            <button type="button" class="btn btn-primary" >
+            <button type="button" class="btn btn-primary" data-bs-target="#eliminarRed" data-bs-toggle="modal">
               <i class="fa-solid fa-trash"></i>
             </button>
           </li> 
@@ -27,7 +27,7 @@
             <button type="button" class="btn btn-primary" data-bs-target="#editarRedModal" data-bs-toggle="modal" style="margin-right: 8px; margin-left: 32px;">
               <i class="fa-solid fa-pen"></i>
             </button>
-            <button type="button" class="btn btn-primary" >
+            <button type="button" class="btn btn-primary" data-bs-target="#eliminarRed" data-bs-toggle="modal">
               <i class="fa-solid fa-trash"></i>
             </button>
           </li> 
@@ -119,3 +119,20 @@
 </div>
 
 <!-- BOTÓN DE MODAL ELIMINAR RED SOCIAL -->
+ <div class="modal fade" id="eliminarRed" tabindex="-1" aria-labelledby="eliminarRedLabel2" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Eliminar red social</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <p>¿Seguro/a que quieres eliminar esta red social?</p>
+      </div>
+      <div class="modal-footer">
+        <button type="submit" class="btn btn-primary">Si</button>
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"> No </button>
+      </div>
+    </div>
+  </div>
+</div>

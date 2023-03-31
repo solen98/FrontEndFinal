@@ -17,7 +17,7 @@
                  <div class="d-flex justify-content-center my-3">
                   <button type="button" class="btn btn-primary" data-bs-target="#editarProyectoModal" data-bs-toggle="modal" style="margin-right: 8px; margin-top: 25px;">
                     <i class="fa-solid fa-pen"></i> </button>
-                    <button type="button" class="btn btn-primary" style="margin-right: 8px; margin-top: 25px;" >
+                    <button type="button" class="btn btn-primary" data-bs-target="#eliminarProyecto" data-bs-toggle="modal" style="margin-right: 8px; margin-top: 25px;" >
                       <i class="fa-solid fa-trash"></i>
                     </button>
                     </div>
@@ -32,7 +32,7 @@
                   <div class="d-flex justify-content-center">
                   <button type="button" class="btn btn-primary" data-bs-target="#editarProyectoModal" data-bs-toggle="modal" style="margin-right: 8px">
                     <i class="fa-solid fa-pen"></i> </button>
-                    <button type="button" class="btn btn-primary" style="margin-right: 8px">
+                    <button type="button" class="btn btn-primary" data-bs-target="#eliminarProyecto" data-bs-toggle="modal" style="margin-right: 8px">
                       <i class="fa-solid fa-trash"></i>
                     </button>
                   </div>
@@ -149,3 +149,20 @@
 </div>
 
   <!-- BOTÓN DE MODAL ELIMINAR PROYECTO -->  
+ <div class="modal fade" id="eliminarProyecto" tabindex="-1" aria-labelledby="eliminarProyectoLabel2" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Eliminar proyecto</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <p>¿Seguro/a que quieres eliminar este proyecto?</p>
+      </div>
+      <div class="modal-footer">
+        <button type="submit" class="btn btn-primary">Si</button>
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"> No </button>
+      </div>
+    </div>
+  </div>
+</div>
