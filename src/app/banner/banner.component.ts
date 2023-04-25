@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { PrincipalService } from '../servicios/principal.service';
+import { Banner } from '../modelos/banner';
+import { BannerService } from '../servicios/banner.service';
 
 @Component({
   selector: 'app-banner',
@@ -8,21 +9,20 @@ import { PrincipalService } from '../servicios/principal.service';
 })
 export class BannerComponent implements OnInit {
 //Crear/Inicializar variable de instancia para almacenar los datos con los que trata el Servicio 
-Banner: any;
+fondo: Banner[]=[];
 
 
-  constructor(
-    //Inyectar el servicio para tener acceso en la clase a los métodos
-  private principalService: PrincipalService) { }
-  
+
+  constructor(private principalBanner: BannerService) { }
 
 
-  ngOnInit():  void {
-    //Esto es para almacenar en la variable de instancia los datos recuperados por el Servicio
-    this.principalService.getDatos().subscribe(principal => {
-      //console.log(principal);
-     //Definir informacion a mostrar
-    this.Banner=principal.Banner
-  });
+
+ngOnInit():  void {
+    this.verBanner();
   }
+
+  verBanner(): void {
+    this.principalBanner.lista().subscribe(data => {
+      this.fondo=data})
+    }
 }

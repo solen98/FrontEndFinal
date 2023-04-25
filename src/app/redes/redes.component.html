@@ -1,12 +1,12 @@
 <ul class="list-group list-group-horizontal">
-<div class="redes" *ngFor="let red of Redes">
+<div class="redes" *ngFor="let red of redes">
     <li class="list-group-item"> <a [href]="red.link" target="_blank"> <i [ngClass]="red.icono"></i></a> </li>
           <!-- Button trigger modal -->  
           <!--boton que abre el login--> 
         </div>     
 <div class="entrar">
     <li class="list-group-item">  
-        <i class="fa-solid fa-user-lock fa-2xl" type="button" data-bs-toggle="modal" data-bs-target="#loginModal"></i>
+        <a routerLink="/login"> <i class="fa-solid fa-user-lock fa-2xl" type="button" data-bs-toggle="modal" data-bs-target="#loginModal"></i> </a>
 </li>
 </div> 
 </ul>

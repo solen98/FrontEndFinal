@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
+import { Sobremi } from 'src/app/modelos/sobremi';
+
+import { AutenticacionService } from 'src/app/servicios/autenticacion.service';
 
 
 @Component({
@@ -11,61 +14,98 @@ import { Router } from '@angular/router';
 
 
 export class LoginComponent implements OnInit {
-  form: FormGroup = new FormGroup({
-    email: new FormControl(''),
-    password: new FormControl('')
-  });
-
+  form: FormGroup;
+  sobremi: Sobremi = new Sobremi("", "", "", "", "", "", "");
+ 
   // Inyectar en el constructor el formBuilder
-  constructor(private formBuilder: FormBuilder, private Router: Router){ 
+  constructor(private formBuilder: FormBuilder, private auteService: AutenticacionService, private ruta: Router){ 
 
 
     ///Creamos el grupo de controles para el formulario de login
     this.form= this.formBuilder.group({
-      password:['',[Validators.required, Validators.minLength(8)]],
-      email:['', [Validators.required, Validators.email]],
+      contrasena:['',[Validators.required, Validators.minLength(8)]],
+      correo:['', [Validators.required, Validators.email]],
    })};
-   submitted = false; //submitted/enviado
+   //submitted = false; 
 
 
 
 
-  ngOnInit(){}
+  ngOnInit(){
+
+  }
   //metodos para el formulario
   //toma el dato del password
-  get Password(){
-    return this.form.get("password");
+  get Correo(){
+    return this.form.get("correo");
   }
  //toma el dato del mail
-  get Mail(){
-    return this.form.get("email");
+  get Contrasena(){
+    return this.form.get("contrasena");
    }
   //metodo de validacion del password
-   get PasswordValid(){
-     return this.Password?.touched && !this.Password?.valid;
+   get CorreoValid(){
+     return this.Correo?.touched && !this.Correo?.valid;
    }
   //metodo de validacion del mail
-   get MailValid() {
-     return this.Mail?.touched && !this.Mail?.valid;
+   get ContrasenaValid() {
+     return this.Contrasena?.touched && !this.Contrasena?.valid;
    }
 
 
+   //onEnviar(event: Event){
+    // event.preventDefault;
+    // if (this.form.valid){
+     //this.auteService.loginPersona(JSON.stringify(this.form.value)).subscribe(data =>
+     //  {
+     //    console.log("DATA: " + JSON.stringify(data));
+      //  this.ruta.navigate(['/dashboard'])
+      // }, error =>{
+     //    alert("error al iniciar sesion")
+     //  })
+      //this.ruta.navigate([''])
+  //   }  else {
+      // alert("Hay un error en el formulario")
+     //}
+   
+  // }
 
-
-   onEnviar(event: Event){
-    // Detenemos la propagación o ejecución del compotamiento submit de un form
-    event.preventDefault; 
- 
-    if (this.form.valid){
-      // Llamamos a nuestro servicio para enviar los datos al servidor
-      // También podríamos ejecutar alguna lógica extra
-      alert("Ya puedes ingresar a la sección administrador")
-    }else{
-      // Corremos todas las validaciones para que se ejecuten los mensajes de error en el template     
-      this.form.markAllAsTouched();
+  onEnviar(event: Event) {
+    if (this.form.valid) {
+        console.log(JSON.stringify(this.form.value));
+        
+        event.preventDefault;
+        this.auteService.loginPersona(this.form.value).subscribe(data => {               
+            if (data === null || data === undefined)
+            {
+              alert("Credenciales no validas");
+            }else{
+              this.ruta.navigate(['/dashboard']); 
+            }
+          },            
+          error => {
+              alert("Credenciales no validas " + error);
+          })             
+    }else {
+      console.log("formulario no válido" + JSON.stringify(this.form.value));
+        sessionStorage.setItem('currentUser', "null");
+        sessionStorage.setItem('idUser', "0");
+        alert("Credenciales no validas");
+        
     }
+  }
+
+  onCerrar() {
+        sessionStorage.setItem('currentUser', "null");
+        sessionStorage.setItem('idUser', "0");  
+        this.ruta.navigate(['/portfolio']);
+  }
+  volver(){
+    this.ruta.navigate(['/']);
+  }
+
  
   }
 
 
-}
+

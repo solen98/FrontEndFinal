@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
+import { Banner } from 'src/app/modelos/banner';
+import { BannerService } from 'src/app/servicios/banner.service';
 
 @Component({
   selector: 'app-modal-banner',
@@ -7,14 +9,17 @@ import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms'
   styleUrls: ['./modal-banner.component.css']
 })
 export class ModalBannerComponent implements OnInit {
-  form: FormGroup= new FormGroup({
-    nombre: new FormControl(''),
-    profesion: new FormControl(''),
-  });
+  form: FormGroup;
+  id!: number;
+  fondo: Banner[]=[];
+  nombre! : '';
+  profesion!: '';
 
 
- constructor(private formBuilder: FormBuilder) {
+
+ constructor(private formBuilder: FormBuilder, private principalBanner: BannerService) {
     this.form= this.formBuilder.group({
+      id: [''],
       nombre:['', [Validators.required, Validators.maxLength(35)]],
       profesion:[ '',[Validators.required, Validators.maxLength(50)]],
    })
@@ -22,23 +27,24 @@ export class ModalBannerComponent implements OnInit {
 
 
   ngOnInit(): void {
+    this.verBanner();
   }
 
-  get nombre(){
+  get Nombre(){
     return this.form.get("nombre");
    }
 
-   get profesion(){
+   get Profesion(){
     return this.form.get("profesion");
    }
 
-   get nombreValid(){
-    return this.nombre?.touched && !this.nombre?.valid;
+   get NombreValid(){
+    return this.Nombre?.touched && !this.Nombre?.valid;
   }
 
 
-   get profesionValid(){
-     return this.profesion?.touched && !this.profesion?.valid;
+   get ProfesionValid(){
+     return this.Profesion?.touched && !this.Profesion?.valid;
    }
 
 
@@ -57,5 +63,57 @@ export class ModalBannerComponent implements OnInit {
     }
  
   }
+
+  findBanner(id: number){
+    this.principalBanner.getById(id).subscribe({
+      next: (data) => {
+        this.form.setValue(data);
+      },
+      error: (e) => console.error(e),
+      complete: () => console.info('complete')
+    });
+    console.log("Dato cargado correctamente");
+  }
+
+  verBanner(): void {
+    this.principalBanner.lista().subscribe(data => {
+      this.fondo=data})
+  }
+
+
+  saveBanner() {
+    let banner = this.form.value;
+    if (banner.id == '') {
+      this.principalBanner.create(banner).subscribe({
+        next: (data) => {
+          this.reset();
+        },
+        error: (e) => console.error(e),
+        //complete: () => console.info('complete')
+      });
+      window.location.reload();
+      alert("Dato agregado correctamente");
+    } else {
+      this.principalBanner.edit(banner.id, banner).subscribe({
+        next: (data) => {
+          this.reset();
+        },
+        error: (e) => console.error(e),
+        //complete: () => console.info('complete')
+      });
+      window.location.reload();
+      alert("Dato modificado correctamente");
+    }
+  }
+
+
+  reset(): void {
+    this.form.reset();
+  }
+  
+  cerrar(): void {
+    window.location.reload();
+  }
+  
 
 }

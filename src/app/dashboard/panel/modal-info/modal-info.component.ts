@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators} from '@angular/forms';
+import { Sobremi } from 'src/app/modelos/sobremi';
+import { SobremiService } from 'src/app/servicios/sobremi.service';
 
 @Component({
   selector: 'app-modal-info',
@@ -7,86 +9,156 @@ import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms'
   styleUrls: ['./modal-info.component.css']
 })
 export class ModalInfoComponent implements OnInit {
-  form: FormGroup= new FormGroup({
-    Img: new FormControl(''),
-    acercademi: new FormControl(''),
-    acercademi2: new FormControl(''),
-    acercademi3: new FormControl(''),
-    acercademi4: new FormControl('')
-  });
+  form: FormGroup;
+    id!: number; 
+    imagen!: '';
+    acercademi1!: '';
+    acercademi2!: '';
+    acercademi3!: '';
+    acercademi4!: '';
+    correo!: '';
+    contrasena!: '';
+    acercadeyo : Sobremi[]=[];
+    sobremi: any;
 
 
 
-  constructor(private formBuilder: FormBuilder) { 
+  constructor(private formBuilder: FormBuilder, private principalSobremi:SobremiService ) { 
     this.form= this.formBuilder.group({
-      Img:['', [Validators.required]],
-      acercademi:[ '',[Validators.required, Validators.maxLength(200) ]],
+      id: [''],
+      imagen:['', [Validators.required]],
+      acercademi1:[ '',[Validators.required, Validators.maxLength(200) ]],
       acercademi2:[ '',[Validators.required,Validators.maxLength(200) ]],
       acercademi3:[ '',[Validators.required, Validators.maxLength(200) ]],
       acercademi4:[ '',[Validators.required, Validators.maxLength(200) ]],
+      correo: ['',[Validators.required, Validators.email]],
+      contrasena:[['',Validators.required, Validators.minLength(8)]]
    })
 
 
   }
   ngOnInit(): void {
-  }
+     this.verSobremi(); 
+    }
 
-  get Img(){
-    return this.form.get("Img");
+  get Imagen(){
+    return this.form.get("imagen");
   }
   
-  get acercademi(){
-   return this.form.get("acercademi");
+  get Acercademi1(){
+   return this.form.get("acercademi1");
   }
 
-  get acercademi2(){
+  get Acercademi2(){
     return this.form.get("acercademi2");
    }
   
-   get acercademi3(){
+   get Acercademi3(){
     return this.form.get("acercademi3");
    }
 
-   get acercademi4(){
+   get Acercademi4(){
     return this.form.get("acercademi3");
    }
 
+   get Correo(){
+    return this.form.get("correo");
+   }
 
-  get ImgValid(){
-    return this.Img?.touched && !this.Img?.valid;
+   get Contrasena(){
+    return this.form.get("contrasena");
+   }
+
+
+
+  get ImagenValid(){
+    return this.Imagen?.touched && !this.Imagen?.valid;
   }
   
-  get acercademiValid() {
-    return this.acercademi?.touched && !this.acercademi?.valid;
+  get Acercademi1Valid() {
+    return this.Acercademi1?.touched && !this.Acercademi1?.valid;
   }
 
-  get acercademi2Valid() {
-    return this.acercademi2?.touched && !this.acercademi2?.valid;
+  get Acercademi2Valid() {
+    return this.Acercademi2?.touched && !this.Acercademi2?.valid;
   }
 
-  get acercademi3Valid() {
-    return this.acercademi3?.touched && !this.acercademi3?.valid;
+  get Acercademi3Valid() {
+    return this.Acercademi3?.touched && !this.Acercademi3?.valid;
   }
 
-  get acercademi4Valid() {
-    return this.acercademi4?.touched && !this.acercademi4?.valid;
+  get Acercademi4Valid() {
+    return this.Acercademi4?.touched && !this.Acercademi4?.valid;
+  }
+
+  get CorreoValid() {
+    return this.Correo?.touched && !this.Correo?.valid;
+  }
+
+  get ContrasenaValid() {
+    return this.Contrasena?.touched && !this.Contrasena?.valid;
   }
 
 
-  onEnviar(event: Event){
-    // Detenemos la propagación o ejecución del compotamiento submit de un form
-    event.preventDefault; 
- 
-    if (this.form.valid){
-      // Llamamos a nuestro servicio para enviar los datos al servidor
-      // También podríamos ejecutar alguna lógica extra
-      alert("Ya puedes ingresar a la sección administrador")
-    }else{
-      // Corremos todas las validaciones para que se ejecuten los mensajes de error en el template     
-      this.form.markAllAsTouched();
-      alert("¡COMPLETA LOS DATOS!")
+  verSobremi(): void {
+    this.principalSobremi.lista().subscribe(data => {
+      this.acercadeyo=data})
     }
- 
-  }
+
+    findSobremi(id: number){
+      this.principalSobremi.getById(id).subscribe({
+        next: (data) => {
+          this.form.setValue(data);
+        },
+        error: (e) => console.error(e),
+        complete: () => console.info('complete')
+      });
+      console.log("Dato cargado correctamente");
+    }
+
+    onCreate(): void{
+      const sobremi = new Sobremi(this.imagen, this.acercademi1, this.acercademi2, this.acercademi3, this.acercademi4, this.correo, this.contrasena);
+      this.principalSobremi.create(sobremi).subscribe(data=>{
+        alert("");
+        window.location.reload();
+      }, err =>{
+        alert("Dato añadido");
+        this.form.reset();
+      });
+    }
+    
+    saveSobremi() {
+      let sobremi = this.form.value;
+      if (sobremi.id == '') {
+        this.principalSobremi.create(sobremi).subscribe({
+          next: (data) => {
+            this.limpiar();
+          },
+          error: (e) => console.error(e),
+          //complete: () => console.info('complete')
+        });
+        window.location.reload();
+        alert("Dato agregado correctamente");
+      } else {
+        this.principalSobremi.edit(sobremi.id, sobremi).subscribe({
+          next: (data) => {
+            this.limpiar();
+          },
+          error: (e) => console.error(e),
+          //complete: () => console.info('complete')
+        });
+        window.location.reload();
+        alert("Dato modificado correctamente");
+      }
+    }
+  
+
+limpiar(): void {
+  this.form.reset();
+}
+
+cerrar(): void {
+  window.location.reload();
+}
 
 }

@@ -1,4 +1,4 @@
-section.banner{
+.imagen-fondo{
     background-image: linear-gradient(
         rgba(0,0,0,0.1),
         rgba(0,0,0,0.6)
@@ -13,6 +13,6 @@ section.banner{
     -moz-background-size: cover;
     -o-background-size: cover;
     -msn-background-size:cover;
-}
+} 
 
 

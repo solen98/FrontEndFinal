@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators,  } from '@angular/forms';
+import { Router } from '@angular/router';
+import { Hardskill } from 'src/app/modelos/hardskill';
+import { HardskillService } from 'src/app/servicios/hardskill.service';
 
 
 @Component({
@@ -8,38 +11,45 @@ import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms'
   styleUrls: ['./modal-hardskill.component.css']
 })
 export class ModalHardskillComponent implements OnInit {
-  form: FormGroup = new FormGroup({
-    titulo: new FormControl(''),
-    porcentaje: new FormControl('')
-  });
+  form: FormGroup;
+    id!: number;
+    titulo!: '';
+    porcentaje!: 0;
+    hardskills: Hardskill[]=[];
+    skill: any;
+ 
+
 
   // Inyectar en el constructor el formBuilder
-  constructor(private formBuilder: FormBuilder) { 
+  constructor(private formBuilder: FormBuilder, private principalHardskill:HardskillService, private ruta: Router) { 
     ///Creamos el grupo de controles para el formulario de login
     this.form= this.formBuilder.group({
-      titulo:[ '', [Validators.required, Validators.pattern("[a-zA-ZñÑá-úÁ-Ú]*")]],
+      id: [''],
+      titulo:[ '', [Validators.required]],
       porcentaje:[ 0,[Validators.required, Validators.min(0),Validators.max(100) ]],
    })
   }
 
   ngOnInit(): void {
+    this.verHardskill();
+
   }
 
  //declaramos los campos 
-get titulo(){
+get Titulo(){
   return this.form.get("titulo");
 }
 
-get porcentaje(){
+get Porcentaje(){
  return this.form.get("porcentaje");
 }
 
-get tituloValid(){
-  return this.titulo?.touched && !this.titulo?.valid;
+get TituloValid(){
+  return this.Titulo?.touched && !this.Titulo?.valid;
 }
 
-get porcentajeValid() {
-  return this.porcentaje?.touched && !this.porcentaje?.valid;
+get PorcentajeValid() {
+  return this.Porcentaje?.touched && !this.Porcentaje?.valid;
 }
 
 
@@ -65,4 +75,84 @@ onRespuesta(event: Event){
     // También podríamos ejecutar alguna lógica extra
     alert("¡Sección eliminada!")
 }
+
+
+
+onCreate(): void{
+  const hskill = new Hardskill(this.titulo, this.porcentaje);
+  this.principalHardskill.create(hskill).subscribe(data=>{
+    alert("");
+    window.location.reload();
+  }, err =>{
+    alert("Dato añadido");
+    this.form.reset();
+  });
+}
+
+verHardskill(): void {
+  this.principalHardskill.lista().subscribe(data => {
+    this.hardskills=data})
+  }
+
+  findSkill(id: number){
+    this.principalHardskill.getById(id).subscribe({
+      next: (data) => {
+        this.form.setValue(data);
+      },
+      error: (e) => console.error(e),
+      complete: () => console.info('complete')
+    });
+    console.log("Dato cargado correctamente");
+  }
+
+  saveSkill() {
+    let skill = this.form.value;
+    if (skill.id == '') {
+      this.principalHardskill.create(skill).subscribe({
+        next: (data) => {
+          this.reset();
+        },
+        error: (e) => console.error(e),
+        //complete: () => console.info('complete')
+      });
+      window.location.reload();
+      alert("Dato agregado correctamente");
+    } else {
+      this.principalHardskill.edit(skill.id, skill).subscribe({
+        next: (data) => {
+          this.reset();
+        },
+        error: (e) => console.error(e),
+        //complete: () => console.info('complete')
+      });
+      window.location.reload();
+      alert("Dato modificado correctamente");
+    }
+  }
+
+  reset(): void {
+    this.form.reset();
+  }
+
+  delete(id:number){
+    if (id != undefined){
+      this.principalHardskill.delete(id).subscribe(data=>{
+       this.verHardskill();
+      }, err =>{
+        alert("Dato eliminado");
+        this.form.reset();
+      });
+  
+    }
+  }
+
+
+limpiar(): void {
+  this.form.reset();
+}
+
+cerrar(): void {
+  window.location.reload();
+}
+
 }

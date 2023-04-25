@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators} from '@angular/forms';
+import { Proyecto } from 'src/app/modelos/proyecto';
+import { ProyectoService } from 'src/app/servicios/proyecto.service';
 
 
 @Component({
@@ -8,15 +10,18 @@ import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms'
   styleUrls: ['./modal-portfolio.component.css']
 })
 export class ModalPortfolioComponent implements OnInit {
-  form: FormGroup= new FormGroup({
-    titulo: new FormControl(''),
-    descripcion: new FormControl(''),
-    link: new FormControl(''),
+  form: FormGroup;
+    id!: number;
+    titulo!: '';
+    descripcion!: '';
+    link!: '';
+    proyectos: Proyecto[]=[];
+    proye: any;
 
-  });
 
-  constructor(private formBuilder: FormBuilder) {
+  constructor(private formBuilder: FormBuilder, private principalProyecto:ProyectoService) {
     this.form= this.formBuilder.group({
+      id: [''],
       titulo:['', [Validators.required, Validators.maxLength(40)]],
       descripcion:[ '',[Validators.required, Validators.maxLength(100)]],
       link:[ '',[Validators.required]],
@@ -24,31 +29,32 @@ export class ModalPortfolioComponent implements OnInit {
    }
 
   ngOnInit(): void {
+    this.verProyecto();
   }
 
 
-  get titulo(){
+  get Titulo(){
     return this.form.get("titulo");
    }
 
-   get descripcion(){
+   get Descripcion(){
     return this.form.get("descripcion");
    }
 
-   get link(){
+   get Link(){
     return this.form.get("link");
    }
 
-   get tituloValid(){
-     return this.titulo?.touched && !this.titulo?.valid;
+   get TituloValid(){
+     return this.Titulo?.touched && !this.Titulo?.valid;
    }
 
-   get descripcionValid() {
-     return this.descripcion?.touched && !this.descripcion?.valid;
+   get DescripcionValid() {
+     return this.Descripcion?.touched && !this.Descripcion?.valid;
    }
 
-   get linkValid() {
-    return this.link?.touched && !this.link?.valid;
+   get LinkValid() {
+    return this.Link?.touched && !this.Link?.valid;
   }
 
 
@@ -67,6 +73,17 @@ export class ModalPortfolioComponent implements OnInit {
     }
  
   }
+  onCreate(): void{
+    const expe = new Proyecto(this.titulo, this.descripcion, this.link);
+    this.principalProyecto.create(expe).subscribe(data=>{
+      alert("");
+      window.location.reload();
+    }, err =>{
+      alert("Dato añadido");
+      this.form.reset();
+    });
+  }
+
   onRespuesta(event: Event){
     // Detenemos la propagación o ejecución del compotamiento submit de un form
     event.preventDefault; 
@@ -75,4 +92,72 @@ export class ModalPortfolioComponent implements OnInit {
       // También podríamos ejecutar alguna lógica extra
       alert("¡Sección eliminada!")
   }
+
+  verProyecto(): void {
+    this.principalProyecto.lista().subscribe(data => {
+      this.proyectos=data})
+  }
+
+  findProyecto(id: number){
+    this.principalProyecto.getById(id).subscribe({
+      next: (data) => {
+        this.form.setValue(data);
+      },
+      error: (e) => console.error(e),
+      complete: () => console.info('complete')
+    });
+    console.log("Dato cargado correctamente");
+  }
+
+  saveProye() {
+    let proye = this.form.value;
+    if (proye.id == '') {
+      this.principalProyecto.create(proye).subscribe({
+        next: (data) => {
+          this.reset();
+        },
+        error: (e) => console.error(e),
+        //complete: () => console.info('complete')
+      });
+      window.location.reload();
+      alert("Dato agregado correctamente");
+    } else {
+      this.principalProyecto.edit(proye.id, proye).subscribe({
+        next: (data) => {
+          this.reset();
+        },
+        error: (e) => console.error(e),
+        //complete: () => console.info('complete')
+      });
+      window.location.reload();
+      alert("Dato modificado correctamente");
+    }
+  }
+
+  reset(): void {
+    this.form.reset();
+  }
+
+  delete(id:number){
+    if (id != undefined){
+      this.principalProyecto.delete(id).subscribe(data=>{
+       this.verProyecto();
+      }, err =>{
+        alert("Dato eliminado");
+        this.form.reset();
+      });
+  
+    }
+  }
+
+  
+limpiar(): void {
+  this.form.reset();
+}
+
+cerrar(): void {
+  window.location.reload();
+}
+
+
   }

@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 
 import { AppComponent } from './app.component';
@@ -29,6 +29,10 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ModalHardskillComponent } from './dashboard/panel/modal-hardskill/modal-hardskill.component';
 import { ModalSoftskillComponent } from './dashboard/panel/modal-softskill/modal-softskill.component';
 import { ModalBannerComponent } from './dashboard/panel/modal-banner/modal-banner.component';
+import { InterceptorService } from './servicios/interceptor.service';
+import { PersonaService } from './servicios/persona.service';
+import { LoginService } from './servicios/login.service';
+
 
 
 
@@ -59,6 +63,7 @@ import { ModalBannerComponent } from './dashboard/panel/modal-banner/modal-banne
     ModalHardskillComponent,
     ModalSoftskillComponent,
     ModalBannerComponent,
+   
   ],
   imports: [
     BrowserModule,
@@ -67,7 +72,7 @@ import { ModalBannerComponent } from './dashboard/panel/modal-banner/modal-banne
     FormsModule, 
     ReactiveFormsModule
   ],
-  providers: [],
+  providers: [LoginService, { provide: HTTP_INTERCEPTORS, useClass: InterceptorService, multi: true }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

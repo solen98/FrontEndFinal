@@ -1,4 +1,4 @@
-<!--MODAL BANNER-->
+<!--MODAL BANNER--> <!-- SÓLO TENDRÁ LA OPCIÓN DE EDITAR, YA QUE BANNER HAY UNO SOLO-->
 <div class="modal fade" id="imageModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
@@ -6,21 +6,20 @@
           <h5 class="modal-title" id="exampleModal">Banner</h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
-        <div class="modal-body">
+        <div class="modal-body"*ngFor="let banner of fondo" >
           <div class="mb-3 row">
             <div class="banner">
               <img src="assets/img/fondosera.jpg" class="item-align-center" style="width: 25rem" alt="BANNER">
               <div class="NombreyApellido">
-              <h5 class="text-white">  Soledad Del Valle Natali </h5>
+              <h5 class="text-white"> {{banner.nombre}}</h5>
             </div>  
             <div class="Profesion">
-              <p class="text-white">  Desarrolladora Full Stack Jr. </p>
+              <p class="text-white">  {{banner.profesion}}</p>
               </div>    
-            </div>     
-            </div>     
-      </div>
+            </div> 
+          </div> 
         <div class="modal-footer">
-          <button type="button" class="btn btn-primary" data-bs-target="#editarBanner" data-bs-toggle="modal">
+          <button type="button" class="btn btn-primary" data-bs-target="#editarBanner" data-bs-toggle="modal" style="margin-right: 8px;" (click)="banner.id? findBanner(banner.id): null">
             <i class="fa-solid fa-pen"></i>
           </button>
           <button type="button" class="btn btn-primary" data-bs-dismiss="modal" aria-label="Close">Cerrar</button>
@@ -28,7 +27,9 @@
         </div>
       </div>
     </div>
-  
+  </div>
+
+
   <!--MODAL EDITAR BANNER-->
   <div class="modal fade" id="editarBanner" tabindex="-1" aria-labelledby="editarBannerLabel2" aria-hidden="true">
       <div class="modal-dialog">
@@ -37,31 +38,33 @@
             <h5 class="modal-title" id="exampleModal">Editar Banner</h5>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
-          <form [formGroup]="form"  (ngSubmit)="onEnviar($event)"> 
+          <form [formGroup]="form">   
+            <input type="hidden" id="id">
+
           <div class="modal-body">
             <div class="mb-3 row">
               <label for="exampleFormControlTextarea1" class="form-label">Nombre y Apellido</label>
                 <div class="col-sm-10">
-                  <input class="form-control" formControlName="nombre" type="text" placeholder="Nombre y Apellido" [class.border-danger]="nombreValid" aria-label="default input example">
-                  <div *ngIf="nombre?.hasError && nombre?.touched">  
-                    <p *ngIf="nombre?.hasError('required')" class="error"> Debes ingresar un nombre y apellido.</p> 
-                    <p *ngIf="nombre?.hasError('maxlength')" class="error"> El límite máximo es de 35 caracteres.</p> 
+                  <input class="form-control" formControlName="nombre" type="text" placeholder="Nombre y Apellido" [class.border-danger]="NombreValid" aria-label="default input example">
+                  <div *ngIf="Nombre?.hasError && Nombre?.touched">  
+                    <p *ngIf="Nombre?.hasError('required')" class="error"> Debes ingresar un nombre y apellido.</p> 
+                    <p *ngIf="Nombre?.hasError('maxlength')" class="error"> El límite máximo es de 35 caracteres.</p> 
                   </div>
                 </div>
               </div>
                 <div class="mb-3 row">
                   <label for="exampleFormControlTextarea1" class="form-label" >Profesión</label>
                   <div class="col-sm-10">
-                    <input class="form-control" type="text" formControlName="profesion" placeholder="Profesión" [class.border-danger]="profesionValid" aria-label="default input example">
-                    <div *ngIf="profesion?.hasError && profesion?.touched">  
-                      <p *ngIf="profesion?.hasError('required')" class="error"> Debes ingresar una profesión.</p> 
-                      <p *ngIf="profesion?.hasError('maxlength')" class="error"> El límite máximo es de 50 caracteres.</p> 
+                    <input class="form-control" type="text" formControlName="profesion" placeholder="Profesión" [class.border-danger]="ProfesionValid" aria-label="default input example">
+                    <div *ngIf="Profesion?.hasError && Profesion?.touched">  
+                      <p *ngIf="Profesion?.hasError('required')" class="error"> Debes ingresar una profesión.</p> 
+                      <p *ngIf="Profesion?.hasError('maxlength')" class="error"> El límite máximo es de 50 caracteres.</p> 
                     </div>
                   </div>
                 </div>        
         </div>
           <div class="modal-footer">
-            <button type="submit" class="btn btn-primary">Guardar</button>
+            <button type="submit" class="btn btn-primary" (click)="saveBanner()" [disabled]="form.invalid">Guardar</button>
           </div>  
           </form>
         </div>

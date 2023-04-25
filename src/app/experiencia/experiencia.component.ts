@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { PrincipalService } from '../servicios/principal.service';
+import { ExperienciaService } from '../servicios/experiencia.service';
+import { Experiencia } from '../modelos/experiencia';
 
 
 @Component({
@@ -8,20 +9,23 @@ import { PrincipalService } from '../servicios/principal.service';
   styleUrls: ['./experiencia.component.css']
 })
 export class ExperienciaComponent implements OnInit {
-Experiencia: any; 
+experiencias: Experiencia[]=[];
 
 
   constructor(
     //Inyectar el servicio para tener acceso en la clase a los métodos
-  private principalService: PrincipalService
+  private principalExperiencia:ExperienciaService
   ) { } 
 
   ngOnInit(): void {
-    //Esto es para almacenar en la variable de instancia los datos recuperados por el Servicio
-    this.principalService.getDatos().subscribe(principal => {
-      //console.log(principal);
-     //Definir informacion a mostrar
-    this.Experiencia=principal.Experiencia
-  });
+  this.verExperiencia();
   }
+
+ verExperiencia(): void {
+  this.principalExperiencia.lista().subscribe(data => {
+    this.experiencias=data})
+}
+
+
+
 }

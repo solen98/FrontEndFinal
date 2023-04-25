@@ -6,68 +6,35 @@
           <h5 class="modal-title" id="exampleModal">Educación</h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
-
         <div class="modal-body">
           <div class="row">
-            <div class="col-4">
+            <div class="col-4" *ngFor="let educa of educaciones">
               <div class="card">
-                <img src="assets/img/certificadorucula.png" class="card-img-top"  alt="CERTIFICADO RUCULA">
-                <div class="card-body">
-                  <h4 class="card-title text-center"> TÍTULO </h4>
+                <img [src]="educa.imagen" class="card-img-top">
+                <div class="card-body" style="height: 15rem;">
+                  <h4 class="card-title text-center"> {{educa.titulo}}</h4>
                   <div class="d-flex justify-content-center my-3">
-                  <button type="button" class="btn btn-primary" data-bs-target="#editarEducacion" data-bs-toggle="modal" style="margin-right: 8px;">
+                  <button type="button" class="btn btn-primary" data-bs-target="#editarEducacion" data-bs-toggle="modal" style="margin-right: 8px;" (click)="educa.id? findEducacion(educa.id): null">
                     <i class="fa-solid fa-pen"></i>
                   </button>
-                  <button type="button" class="btn btn-primary" data-bs-target="#eliminarEducacion" data-bs-toggle="modal" >
-                    <i class="fa-solid fa-trash"></i>
+                  <button type="button" class="btn btn-primary" data-bs-target="#eliminarEducacion"  data-bs-toggle="modal" (click)="delete(educa.id)">
+                    <i class="fa-solid fa-trash" ></i>
                   </button>
                 </div>
                 </div>
               </div> 
           </div>
-          <div class="col-4">
-            <div class="card">
-              <img src="assets/img/certificadoprogramacion.png"class="card-img-top"  alt="CERTIFICADO PROGRAMACION">
-              <div class="card-body">
-                <h4 class="card-title text-center">TÍTULO</h4>
-                <div class="d-flex justify-content-center my-3">
-                <button type="button" class="btn btn-primary" data-bs-target="#editarEducacion" data-bs-toggle="modal" style="margin-right: 8px;">
-                <i class="fa-solid fa-pen"></i>
-              </button>
-                <button type="button" class="btn btn-primary" data-bs-target="#eliminarEducacion" data-bs-toggle="modal" >
-                  <i class="fa-solid fa-trash"></i>
-                </button>
-              </div>
               </div>
             </div>
-          </div>
-            <div class="col-4">
-              <div class="card">
-                <img src="assets/img/certificado SEO.png" class="card-img-top" alt="CERTIFICADO SEO">
-                <div class="card-body">
-                  <h4 class="card-title text-center" >TÍTULO </h4>
-                  <div class="d-flex justify-content-center my-3">
-                  <button type="button" class="btn btn-primary" data-bs-target="#editarEducacion" data-bs-toggle="modal"style="margin-right: 8px;">
-                    <i class="fa-solid fa-pen"></i>
-                  </button>
-                  <button type="button" class="btn btn-primary" data-bs-target="#eliminarEducacion" data-bs-toggle="modal" >
-                    <i class="fa-solid fa-trash"></i>
-                  </button>
-                </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-              </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-primary" data-bs-target="#agregarEducacion" data-bs-toggle="modal">
             <i class="fa-solid fa-plus"></i>
           </button>
           <button type="button" class="btn btn-primary" data-bs-dismiss="modal" aria-label="Close">Cerrar</button>
         </div>
-      </div>
     </div>
   </div>
+</div>
 
   <!--MODAL AGREGAR EDUCACIÓN-->
   <div class="modal fade" id="agregarEducacion" tabindex="-1" aria-labelledby="agregarEducacionLabel2" aria-hidden="true">
@@ -75,30 +42,30 @@
       <div class="modal-content">
         <div class="modal-header">
           <h5 class="modal-title" id="exampleModal">Agregar Educación</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" (click)="limpiar"></button>
         </div>
 
-        <form [formGroup]="form" (ngSubmit)="onEnviar($event)"> 
+        <form [formGroup]="form" (ngSubmit)="form.valid && onCreate()"> 
         <div class="modal-body">
             <div class="mb-3 row">
               <label for="formFile" class="form-label">Imagen</label>
                 <div class="col-sm-10">
-                  <input type="img" class="form-control" placeholder="Imagen certificado" [class.border-danger]="imgValid" aria-label="default input example" formControlName="img">
-                  <div *ngIf="img?.hasError && img?.touched">  
-                    <p *ngIf="img?.hasError('required')" class="error"> Debes ingresar una Imagen.</p> 
-                    <p *ngIf="img?.hasError('minlength')" class="error"> Debe incluir al menos 10 caracteres. </p>
-                    <p *ngIf="img?.hasError('maxlength')" class="error"> El límite es de 70 caracteres </p>
+                  <input type="imagen" class="form-control" placeholder="Imagen certificado" [class.border-danger]="imagenValid" aria-label="default input example" formControlName="imagen" [(ngModel)]="imagen">
+                  <div *ngIf="Imagen?.hasError && Imagen?.touched">  
+                    <p *ngIf="Imagen?.hasError('required')" class="error"> Debes ingresar una Imagen.</p> 
+                    <p *ngIf="Imagen?.hasError('minlength')" class="error"> Debe incluir al menos 10 caracteres. </p>
+                    <p *ngIf="Imagen?.hasError('maxlength')" class="error"> El límite es de 70 caracteres </p>
                 </div>
                 </div>
               </div>
               <div class="mb-3 row">
                   <label for="exampleFormControlTextarea1" class="form-label">Título</label>
                   <div class="col-sm-10">
-                    <input class="form-control" type="titulo" placeholder="Nombre del curso - Institución" [class.border-danger]="tituloValid" aria-label="default input example" formControlName="titulo">
-                    <div *ngIf="titulo?.hasError && titulo?.touched">  
-                      <p *ngIf="titulo?.hasError('required')" class="error"> Debes ingresar un Título.</p> 
-                      <p *ngIf="titulo?.hasError('minlength')" class="error"> Debe incluir al menos 10 caracteres.</p>
-                      <p *ngIf="titulo?.hasError('maxlength')" class="error"> El límite es de 40 caracteres </p>
+                    <input class="form-control" type="titulo" placeholder="Nombre del curso - Institución" [class.border-danger]="tituloValid" aria-label="default input example" formControlName="titulo" [(ngModel)]="titulo">
+                    <div *ngIf="Titulo?.hasError && Titulo?.touched">  
+                      <p *ngIf="Titulo?.hasError('required')" class="error"> Debes ingresar un Título.</p> 
+                      <p *ngIf="Titulo?.hasError('minlength')" class="error"> Debe incluir al menos 10 caracteres.</p>
+                      <p *ngIf="Titulo?.hasError('maxlength')" class="error"> El límite es de 80 caracteres </p>
                   </div>
                   </div>
                 </div>
@@ -117,41 +84,64 @@
       <div class="modal-content">
         <div class="modal-header">
           <h5 class="modal-title" id="exampleModal">Editar Educación</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" (click)="cerrar"></button>
         </div>
-        <form [formGroup]="form" (ngSubmit)="onEnviar($event)"> 
+        <form [formGroup]="form">   
+          <input type="hidden" id="id">
         <div class="modal-body">
             <div class="mb-3 row">
               <label for="formFile" class="form-label">Imagen</label>
                 <div class="col-sm-10">
-                  <input type="img" class="form-control" placeholder="Imagen certificado" [class.border-danger]="imgValid" aria-label="default input example" formControlName="img">
-                  <div *ngIf="img?.hasError && img?.touched">  
-                    <p *ngIf="img?.hasError('required')" class="error"> Debes ingresar una Imagen.</p> 
+                  <input type="imagen" class="form-control" placeholder="Imagen certificado" [class.border-danger]="imagenValid"  formControlName="imagen" id="imagen">
+                  <div *ngIf="Imagen?.hasError && Imagen?.touched">  
+                    <p *ngIf="Imagen?.hasError('required')" class="error"> Debes ingresar una Imagen.</p> 
                 </div>
                 </div>
               </div>
               <div class="mb-3 row">
                   <label for="exampleFormControlTextarea1" class="form-label">Título</label>
                   <div class="col-sm-10">
-                    <input class="form-control" type="titulo" placeholder="Nombre del curso - Institución" [class.border-danger]="tituloValid" aria-label="default input example" formControlName="titulo">
-                    <div *ngIf="titulo?.hasError && titulo?.touched">  
-                      <p *ngIf="titulo?.hasError('required')" class="error"> Debes ingresar un Título.</p> 
-                      <p *ngIf="titulo?.hasError('minlength')" class="error"> Debe incluir al menos 10 caracteres.</p>
-                      <p *ngIf="titulo?.hasError('maxlength')" class="error"> El límite es de 40 caracteres </p>
+                    <input class="form-control" type="titulo" placeholder="Nombre del curso - Institución" [class.border-danger]="tituloValid"  formControlName="titulo" id="titulo">
+                    <div *ngIf="Titulo?.hasError && Titulo?.touched">  
+                      <p *ngIf="Titulo?.hasError('required')" class="error"> Debes ingresar un Título.</p> 
+                      <p *ngIf="Titulo?.hasError('minlength')" class="error"> Debe incluir al menos 10 caracteres.</p>
+                      <p *ngIf="Titulo?.hasError('maxlength')" class="error"> El límite es de 80 caracteres </p>
                   </div>
                   </div>
                 </div>
         </div>
         <div class="modal-footer">
-          <button type="submit" class="btn btn-primary">Guardar</button>
+          <button type="submit" class="btn btn-primary" (click)="saveEduca()" [disabled]="form.invalid">Guardar</button>
         </div>
       </form>
       </div>
     </div>
   </div>
 
-  <!-- BOTÓN DE MODAL ELIMINAR EDUCACION -->
- <div class="modal fade" id="eliminarEducacion" tabindex="-1" aria-labelledby="eliminarEducacionLabel2" aria-hidden="true">
+  <!-- BOTÓN DE MODAL ELIMINAR EDUCACION 
+  <div class="modal fade" id="eliminarEducacion" tabindex="-1" aria-labelledby="eliminarEducacionLabel2" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Eliminar educación</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <form [formGroup]="form" (ngSubmit)="onRespuesta($event)"> 
+        <div class="modal-body">
+          <p>¿Seguro/a que quieres eliminar esta educación?</p>
+        </div>
+        <div class="modal-footer">
+          <button type="submit" class="btn btn-primary">Si</button>
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"> No </button>
+        </div>
+      </form>
+        </div>
+      </div>
+    </div>
+
+
+
+<div class="modal fade" id="eliminarEducacion" tabindex="-1" aria-labelledby="eliminarEducacionLabel2" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
@@ -163,10 +153,19 @@
         <p>¿Seguro/a que quieres eliminar esta educación?</p>
       </div>
       <div class="modal-footer">
-        <button type="submit" class="btn btn-primary">Si</button>
+        <div class="col" *ngFor="let educa of educaciones">
+          <div class="card" style="width: 20; height: 24;">
+            <img [src]="educa.imagen" class="card-img-top" alt="">
+            <div class="card-body">
+              <h4 class="card-title">{{educa.titulo}}</h4>
+            </div>
+          </div>
+          
+        <button type="submit" class="btn btn-primary" (click)="delete(educa.id)">Si</button>
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"> No </button>
+      </div>
       </div>
       </form>
     </div>
   </div>
-</div>
+</div> -->

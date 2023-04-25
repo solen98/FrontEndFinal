@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { PrincipalService } from '../servicios/principal.service';
+import { RedesService } from '../servicios/redes.service';
+import { Redes } from '../modelos/redes';
+
 
 @Component({
   selector: 'app-redes',
@@ -7,19 +9,23 @@ import { PrincipalService } from '../servicios/principal.service';
   styleUrls: ['./redes.component.css']
 })
 export class RedesComponent implements OnInit {
-  Redes:any;
+  redes : Redes[]=[];
 
   constructor(
-    private principalService: PrincipalService
+     private principalRedes:RedesService
   ) { }
 
+
+
   ngOnInit(): void {
-    //Esto es para almacenar en la variable de instancia los datos recuperados por el Servicio
-    this.principalService.getDatos().subscribe(principal => {
-      //console.log(principal);
-     //Definir informacion a mostrar
-    this.Redes=principal.Redes
-  });
+  this.verRed();
   }
 
+ verRed(): void {
+  this.principalRedes.lista().subscribe(data => {
+    this.redes=data})
 }
+}
+
+
+

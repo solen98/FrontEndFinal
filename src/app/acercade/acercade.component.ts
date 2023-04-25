@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { PrincipalService } from '../servicios/principal.service';
+import { Sobremi } from '../modelos/sobremi';
+import { SobremiService } from '../servicios/sobremi.service';
 
 @Component({
   selector: 'app-acercade',
@@ -8,20 +9,17 @@ import { PrincipalService } from '../servicios/principal.service';
 })
 export class AcercadeComponent implements OnInit {
 //Crear/Inicializar variable de instancia para almacenar los datos con los que trata el Servicio 
-Acercade: any;
+acercademi : Sobremi[]=[];
 
-  constructor(
-    //Inyectar el servicio para tener acceso en la clase a los métodos
-    private principalService: PrincipalService
-  ) { }
+  constructor( private principalSobremi:SobremiService ) { }
 
   ngOnInit(): void {
-    //Esto es para almacenar en la variable de instancia los datos recuperados por el Servicio
-    this.principalService.getDatos().subscribe(principal => {
-      console.log(principal);
-     //Definir informacion a mostrar
-     this.Acercade=principal.Acercade
-    });
+    this.verSobremi();
+    }
+
+  verSobremi(): void {
+    this.principalSobremi.lista().subscribe(data => {
+      this.acercademi=data})
     }
   }
 

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { PrincipalService } from '../servicios/principal.service';
+import { EducacionService } from '../servicios/educacion.service';
+import { Educacion } from '../modelos/educacion';
 
 @Component({
   selector: 'app-educacion',
@@ -7,20 +8,21 @@ import { PrincipalService } from '../servicios/principal.service';
   styleUrls: ['./educacion.component.css']
 })
 export class EducacionComponent implements OnInit {
-  Educacion: any;
+  educaciones: Educacion[]=[];
 
   constructor(
     //Inyectar el servicio para tener acceso en la clase a los métodos
-  private principalService: PrincipalService
+  private principalEducacion: EducacionService
   ) { } 
 
   ngOnInit(): void {
-    //Esto es para almacenar en la variable de instancia los datos recuperados por el Servicio
-    this.principalService.getDatos().subscribe(principal => {
-      //console.log(principal);
-     //Definir informacion a mostrar
-    this.Educacion=principal.Educacion
-  });
+    this.verEducacion();
+    }
+
+  verEducacion(): void {
+    this.principalEducacion.lista().subscribe(data => {
+      this.educaciones=data})
   }
+
 }
 

@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { PrincipalService } from '../servicios/principal.service';
+import { Softskill } from '../modelos/softskill';
+import { Hardskill } from '../modelos/hardskill';
+import { HardskillService } from '../servicios/hardskill.service';
+import { SoftskillService } from '../servicios/softskill.service';
 
 
 @Component({
@@ -8,21 +11,28 @@ import { PrincipalService } from '../servicios/principal.service';
   styleUrls: ['./skills.component.css']
 })
 export class SkillsComponent implements OnInit {
-  HardSkills: any;
-  SoftSkills: any;
-
+  softskills: Softskill[]=[];
+  hardskills: Hardskill[]=[];
+  
   constructor(
      //Inyectar el servicio para tener acceso en la clase a los métodos
-     private principalService: PrincipalService
+     private principalHardskill:HardskillService, private principalSoftskill:SoftskillService
   ) { }
 
   ngOnInit(): void {
-    //Esto es para almacenar en la variable de instancia los datos recuperados por el Servicio
-    this.principalService.getDatos().subscribe(principal => {
-      //console.log(principal);
-     //Definir informacion a mostrar
-    this.HardSkills=principal.HardSkills,
-    this.SoftSkills=principal.SoftSkills
-    });
-  }
+    this.verHardskill();
+    this.verSoftskill();
+    }
+
+  verHardskill(): void {
+    this.principalHardskill.lista().subscribe(data => {
+      this.hardskills=data})
+    }
+  
+  verSoftskill(): void {
+    this.principalSoftskill.lista().subscribe(data => {
+      this.softskills=data})
+}
+
+
 }

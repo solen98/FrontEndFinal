@@ -5,3 +5,11 @@
   .border-danger{
     border-color: red;
   }
+
+  .login{
+    /* margin: 5rem auto; */
+    margin: 15% auto;
+    width: 50%;
+    padding: 2.5%;
+    background: white;
+  }

@@ -1,4 +1,4 @@
-<!--MODAL ACERCADE-->
+<!--MODAL ACERCADE--> <!-- SÓLO TENDRÁ LA OPCIÓN DE EDITAR, YA QUE INFORMACION PERSONAL HAY UNO SOLO-->
 <div class="modal fade" id="infoModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
@@ -6,26 +6,27 @@
           <h5 class="modal-title" id="exampleModal">Información</h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
-        <div class="modal-body">
+        <div class="modal-body" *ngFor="let sobremi of acercadeyo">
           <div class="mb-3 row">
                 <div class="col-3 mt-5">
                   <section class="fotoperfil">
-                  <img src="assets/img/fotoperfil.png" alt="foto de perfil" class="rounded-circle img-fluid img-perfil mt-2">
+                  <img [src]="sobremi.imagen"  alt="foto de perfil" class="rounded-circle img-fluid img-perfil mt-2">
                 </section>
                 </div>
                 <div class="col-9 mt-3">
-                <p> Soy publicista, recibida en la Universidad Siglo 21. Sumergida en el rubro de la comunicación de marcas vía redes sociales. Mi trayecto universitario me ayudó a exprimir mis capacidades para desarollar mensajes adaptados a los intereses del público objetivo de las empresas. Soy creativa y estratégica, apasionada por la redacción, me gusta estar actualizada con las novedades y consumo todo tipo de contenido para cada día mejorar mis conocimientos. <br> Me considero una persona proactiva, responsable, con ganas de aprender y suspearme. Actualmente me encuentro incursionando en el mundo de la programación.</p> 
-          </div>
+                  <h3>Acerca de mí </h3>
+                  <p class="mt-3" >{{sobremi.acercademi1}}<br>{{sobremi.acercademi2}}<br>{{sobremi.acercademi3}}<br>{{sobremi.acercademi4}}</p>
+              </div>
+            </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-primary" data-bs-target="#editarAcercadeModal" data-bs-toggle="modal">
+          <button type="button" class="btn btn-primary" data-bs-target="#editarAcercadeModal" data-bs-toggle="modal" style="margin-right: 8px;" (click)="sobremi.id? findSobremi(sobremi.id): null">
             <i class="fa-solid fa-pen"></i>
           </button>
           <button type="button" class="btn btn-primary" data-bs-dismiss="modal" aria-label="Close">Cerrar</button>
         </div>
-      </div>
+        </div>
     </div>
   </div>
-</div>
 </div>
 
 <!--MODAL EDITAR ACERCADE-->
@@ -34,62 +35,89 @@
       <div class="modal-content">
         <div class="modal-header">
           <h5 class="modal-title" id="exampleModal">Editar Información</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" (click)="cerrar"></button>
         </div>
-        <form [formGroup]="form"  (ngSubmit)="onEnviar($event)"> 
+        <form [formGroup]="form">   
+          <input type="hidden" id="id">
         <div class="modal-body">
           <div class="mb-3 row">
             <label for="exampleFormControlTextarea1" class="form-label">Imagen</label>
             <div class="col-sm-10">
-              <input type="text" class="form-control" formControlName="Img" placeholder="Imagen perfil" [class.border-danger]="ImgValid" id="exampleInputEmail1" aria-label="default input example">
-              <div *ngIf="Img?.errors && Img?.touched">    
-                <p *ngIf="Img?.hasError('required')" class="error"> Debes ingresar una imagen.</p>
+              <input type="text" class="form-control" placeholder="Imagen perfil" [class.border-danger]="ImagenValid" id="imagen" formControlName="imagen">
+              <div *ngIf="Imagen?.errors && Imagen?.touched">    
+                <p *ngIf="Imagen?.hasError('required')" class="error"> Debes ingresar una imagen.</p>
             </div>
             </div>
           </div>   
           <div class="mb-3 row">
             <label for="exampleFormControlTextarea1" class="form-label">Párrafo 1</label>
               <div class="col-sm-10">
-                <input class="form-control" formControlName="acercademi" type="text" placeholder="Descripción 1" [class.border-danger]="acercademiValid" id="exampleInputEmail1" aria-label="default input example">
-                <div *ngIf="acercademi?.errors && acercademi?.touched">    
-                  <p *ngIf="acercademi?.hasError('required')" class="error"> Debes ingresar una descripción.</p>
-                  <p *ngIf="acercademi?.hasError('maxlength')" class="error">El límite máximo es de 200 caracteres.</p>
+                <input class="form-control" type="text" placeholder="Descripción 1" [class.border-danger]="Acercademi1Valid" id="acercademi1" formControlName="acercademi1">
+                <div *ngIf="Acercademi1?.errors && Acercademi1?.touched">    
+                  <p *ngIf="Acercademi1?.hasError('required')" class="error"> Debes ingresar una descripción.</p>
+                  <p *ngIf="Acercademi1?.hasError('maxlength')" class="error">El límite máximo es de 200 caracteres.</p>
               </div>
             </div>
             </div>
+
               <div class="mb-3 row">
                 <label for="exampleFormControlTextarea1" class="form-label">Párrafo 2</label>
                 <div class="col-sm-10">
-                  <input class="form-control" formControlName="acercademi2" type="text" placeholder="Descripción 2" [class.border-danger]="acercademi2Valid" id="exampleInputEmail1" aria-label="default input example">
-                  <div *ngIf="acercademi2?.errors && acercademi2?.touched">    
-                    <p *ngIf="acercademi2?.hasError('required')" class="error"> Debes ingresar una descripción.</p>
-                    <p *ngIf="acercademi2?.hasError('maxlength')" class="error">El límite máximo es de 200 caracteres.</p>
+                  <input class="form-control"type="text" placeholder="Descripción 2" [class.border-danger]="Acercademi2Valid" id="acercademi2" formControlName="acercademi2" >
+                  <div *ngIf="Acercademi2?.errors && Acercademi2?.touched">    
+                    <p *ngIf="Acercademi2?.hasError('required')" class="error"> Debes ingresar una descripción.</p>
+                    <p *ngIf="Acercademi2?.hasError('maxlength')" class="error">El límite máximo es de 200 caracteres.</p>
                 </div>
               </div>
               </div>
+
               <div class="mb-3 row">
                 <label for="exampleFormControlTextarea1" class="form-label">Párrafo 3</label>
                 <div class="col-sm-10">
-                  <input class="form-control" formControlName="acercademi3" type="text" placeholder="Descripción 3" [class.border-danger]="acercademi3Valid" id="exampleInputEmail1" aria-label="default input example">
-                  <div *ngIf="acercademi3?.errors && acercademi3?.touched">    
-                    <p *ngIf="acercademi3?.hasError('required')" class="error"> Debes ingresar una descripción.</p>
-                    <p *ngIf="acercademi3?.hasError('maxlength')" class="error">El límite máximo es de 200 caracteres.</p>
+                  <input class="form-control" type="text" placeholder="Descripción 3" [class.border-danger]="Acercademi3Valid" id="acercademi3" formControlName="acercademi3">
+                  <div *ngIf="Acercademi3?.errors && Acercademi3?.touched">    
+                    <p *ngIf="Acercademi3?.hasError('required')" class="error"> Debes ingresar una descripción.</p>
+                    <p *ngIf="Acercademi3?.hasError('maxlength')" class="error">El límite máximo es de 200 caracteres.</p>
                 </div>
               </div>
-              </div>    
+              </div>
+
               <div class="mb-3 row">
                 <label for="exampleFormControlTextarea1" class="form-label">Párrafo 4</label>
                 <div class="col-sm-10">
-                  <input class="form-control" formControlName="acercademi4" type="text" placeholder="Descripción 4" [class.border-danger]="acercademi4Valid" id="exampleInputEmail1" aria-label="default input example">
-                  <div *ngIf="acercademi4?.errors && acercademi4?.touched">    
-                    <p *ngIf="acercademi4?.hasError('required')" class="error"> Debes ingresar una descripción.</p>
-                    <p *ngIf="acercademi4?.hasError('maxlength')" class="error">El límite máximo es de 200 caracteres.</p>
+                  <input class="form-control" type="text" placeholder="Descripción 4" [class.border-danger]="Acercademi4Valid" id="acercademi4" formControlName="acercademi4">
+                  <div *ngIf="Acercademi4?.errors && Acercademi4?.touched">    
+                    <p *ngIf="Acercademi4?.hasError('required')" class="error"> Debes ingresar una descripción.</p>
+                    <p *ngIf="Acercademi4?.hasError('maxlength')" class="error">El límite máximo es de 200 caracteres.</p>
                 </div>
               </div>
               </div>    
+
+              <div class="mb-3 row">
+                <label for="exampleFormControlTextarea1" class="form-label">Párrafo 4</label>
+                <div class="col-sm-10">
+                  <input class="form-control" type="text" placeholder="nombre@ejemplo.com" [class.border-danger]="CorreoValid" id="correo" formControlName="correo">
+                  <div *ngIf="Correo?.errors && Correo?.touched">    
+                    <p *ngIf="Correo?.hasError('required')" class="error">El email es requerido.</p>
+                    <p *ngIf="Correo?.hasError('email')" class="error">El formato del email debe ser válido.</p>
+                </div>
+              </div>
+              </div>  
+
+              <div class="mb-3 row">
+                <label for="exampleFormControlTextarea1" class="form-label">Párrafo 4</label>
+                <div class="col-sm-10">
+                  <input class="form-control" type="password" placeholder="Contraseña" [class.border-danger]="ContrasenaValid" id="contrasena" formControlName="contrasena">
+                  <div *ngIf="Contrasena?.errors  && Contrasena?.touched">
+                    <p *ngIf="Contrasena?.hasError('required')" class="error">La contraseña es requerida.</p>
+                    <p *ngIf="Contrasena?.hasError('minlength')" class="error">La contraseña debe ser de hasta 8 caracteres.</p>
+                  </div>
+              </div>
+              </div>  
+              
       </div>
         <div class="modal-footer">
-          <button type="submit" class="btn btn-primary">Guardar</button>
+          <button type="submit" class="btn btn-primary" (click)="saveSobremi()" [disabled]="form.invalid">Guardar</button>
         </div>  
       </form>
       </div>

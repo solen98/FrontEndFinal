@@ -1,7 +1,7 @@
 <ul class="list-group list-group-horizontal">
-    <li class=" list-group-item"> <a href="https://www.linkedin.com/in/soledad-del-valle-natali-05617513b/" target="_blank"><i class="fa-brands fa-linkedin fa-2xl"></i></a> </li>
-    <li class="list-group-item"> <a href="https://www.facebook.com/soledad.natali.5" target="_blank"> <i class="fa-brands fa-facebook fa-2xl"></i></a></li>
-    <li class="list-group-item"> <a href="https://github.com/solen98" target="_blank"> <i class="fa-brands fa-github fa-2xl"></i></a></li>
+  <div class="redes" *ngFor="let red of redes">
+    <li class="list-group-item"> <a [href]="red.link" target="_blank"> <i [ngClass]="red.icono"></i></a> </li>
+    </div>
             <!-- Button trigger modal -->   
       <li class="list-group-item">  
         <a routerLink=""> 

@@ -6,34 +6,17 @@
         <h5 class="modal-title" id="exampleModal">Redes sociales</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
-      <div class="modal-body">
-        <ul class="list-group list-group-vertical">
-          <li class=" list-group-item"> <i class="fa-brands fa-facebook fa-2xl"> </i> 
-            <button type="button" class="btn btn-primary" data-bs-target="#editarRedModal" data-bs-toggle="modal" style="margin-right: 8px; margin-left: 30px;">
+      <div class="modal-body" >
+        <ul class="list-group list-group-vertical" *ngFor="let red of redes">
+          <li class=" list-group-item"> <i [ngClass]="red.icono"> </i> 
+            <button type="button" class="btn btn-primary" data-bs-target="#editarRedModal" data-bs-toggle="modal" style="margin-right: 8px; margin-left: 30px;"  (click)="red.id? findRed(red.id): null">
               <i class="fa-solid fa-pen"></i>
             </button>
-            <button type="button" class="btn btn-primary" data-bs-target="#eliminarRed" data-bs-toggle="modal">
+            <button type="button" class="btn btn-primary" data-bs-target="#eliminarRed" data-bs-toggle="modal" (click)="delete(red.id)">
               <i class="fa-solid fa-trash"></i>
             </button>
-          <li class=" list-group-item"> <i class="fa-brands fa-linkedin fa-2xl" > </i> 
-            <button type="button" class="btn btn-primary" data-bs-target="#editarRedModal" data-bs-toggle="modal" style="margin-right: 8px; margin-left: 34px;">
-              <i class="fa-solid fa-pen"></i>
-            </button>
-            <button type="button" class="btn btn-primary" data-bs-target="#eliminarRed" data-bs-toggle="modal">
-              <i class="fa-solid fa-trash"></i>
-            </button>
-          </li> 
-          <li class=" list-group-item"> <i class="fa-brands fa-github fa-2xl"> </i>
-            <button type="button" class="btn btn-primary" data-bs-target="#editarRedModal" data-bs-toggle="modal" style="margin-right: 8px; margin-left: 32px;">
-              <i class="fa-solid fa-pen"></i>
-            </button>
-            <button type="button" class="btn btn-primary" data-bs-target="#eliminarRed" data-bs-toggle="modal">
-              <i class="fa-solid fa-trash"></i>
-            </button>
-          </li> 
         </ul>
       </div>
-
       <div class="modal-footer">
         <button type="button" class="btn btn-primary" data-bs-target="#agregarRedModal" data-bs-toggle="modal">
           <i class="fa-solid fa-plus"></i>
@@ -50,25 +33,25 @@
       <div class="modal-content">
         <div class="modal-header">
           <h5 class="modal-title" id="exampleModal">Agregar red social</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" (click)="limpiar"></button>
         </div>
-        <form [formGroup]="form"  (ngSubmit)="onEnviar($event)">   
+        <form [formGroup]="form"  (ngSubmit)="form.valid && onCreate()">   
         <div class="modal-body">
             <div class="mb-3 row">
               <label for="exampleFormControlTextarea1" class="form-label">Link red social </label>
                 <div class="col-sm-10">
-                  <input class="form-control" formControlName="link" type="text" placeholder="https://ejemplo.com/" [class.border-danger]="linkValid" aria-label="default input example">
-                  <div *ngIf="link?.hasError && link?.touched">  
-                  <p *ngIf="link?.hasError('required')" class="error"> Debes ingresar un link.</p> 
+                  <input class="form-control" formControlName="link" type="text" placeholder="https://ejemplo.com/" [class.border-danger]="LinkValid" aria-label="default input example"  [(ngModel)]="link">
+                  <div *ngIf="Link?.hasError && Link?.touched">  
+                  <p *ngIf="Link?.hasError('required')" class="error"> Debes ingresar un link.</p> 
                 </div>
               </div>
               </div>
                   <div class="mb-3 row">
                   <label for="exampleFormControlTextarea1" class="form-label mt-3">Icono (Fontawesome)</label>
                   <div class="col-sm-10">
-                  <input class="form-control" formControlName="icono" type="text" placeholder="fa-group fa-icon" [class.border-danger]="iconoValid" aria-label="default input example">
-                  <div *ngIf="icono?.hasError && icono?.touched">  
-                    <p *ngIf="icono?.hasError('required')" class="error"> Debes ingresar un icono.</p> 
+                  <input class="form-control" formControlName="icono" type="text" placeholder="fa-group fa-icon" [class.border-danger]="IconoValid" aria-label="default input example" [(ngModel)]="icono">
+                  <div *ngIf="Icono?.hasError && Icono?.touched">  
+                    <p *ngIf="Icono?.hasError('required')" class="error"> Debes ingresar un icono.</p> 
                   </div>
                 </div>
               </div>
@@ -87,38 +70,39 @@
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="exampleModal">Editar red social</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" (click)="cerrar"></button>
       </div>
-      <form [formGroup]="form"  (ngSubmit)="onEnviar($event)">   
+      <form [formGroup]="form">   
+        <input type="hidden" id="id">
       <div class="modal-body">
           <div class="mb-3 row">
             <label for="exampleFormControlTextarea1" class="form-label">Link red social </label>
               <div class="col-sm-10">
-                <input class="form-control" formControlName="link" type="text" placeholder="https://ejemplo.com/" [class.border-danger]="linkValid" aria-label="default input example">
-                <div *ngIf="link?.hasError && link?.touched">  
-                <p *ngIf="link?.hasError('required')" class="error"> Debes ingresar un link.</p> 
+                <input class="form-control" formControlName="link" type="text" placeholder="https://ejemplo.com/" [class.border-danger]="LinkValid" id="link" formControlName="link">
+                <div *ngIf="Link?.hasError && Link?.touched">  
+                <p *ngIf="Link?.hasError('required')" class="error"> Debes ingresar un link.</p> 
               </div>
             </div>
             </div>
                 <div class="mb-3 row">
                 <label for="exampleFormControlTextarea1" class="form-label mt-3">Icono (Fontawesome)</label>
                 <div class="col-sm-10">
-                <input class="form-control" formControlName="icono" type="text" placeholder="fa-group fa-icon" [class.border-danger]="iconoValid" aria-label="default input example">
-                <div *ngIf="icono?.hasError && icono?.touched">  
-                  <p *ngIf="icono?.hasError('required')" class="error"> Debes ingresar un icono.</p> 
+                <input class="form-control" formControlName="icono" type="text" placeholder="fa-group fa-icon" [class.border-danger]="IconoValid" id="icono" formControlName="icono">
+                <div *ngIf="Icono?.hasError && Icono?.touched">  
+                  <p *ngIf="Icono?.hasError('required')" class="error"> Debes ingresar un icono.</p> 
                 </div>
               </div>
             </div>
           </div>
       <div class="modal-footer">
-        <button type="submit" class="btn btn-primary">Guardar</button>
+        <button type="submit" class="btn btn-primary"  (click)="saveRed()" [disabled]="form.invalid">Guardar</button>
       </div>
       </form>
     </div>
   </div>
 </div>
 
-<!-- BOTÓN DE MODAL ELIMINAR RED SOCIAL -->
+<!-- BOTÓN DE MODAL ELIMINAR RED SOCIAL 
  <div class="modal fade" id="eliminarRed" tabindex="-1" aria-labelledby="eliminarRedLabel2" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -137,4 +121,5 @@
       </form>
     </div>
   </div>
-</div>
+</div> 
+-->

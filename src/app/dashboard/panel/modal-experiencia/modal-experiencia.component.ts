@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators,} from '@angular/forms';
+import { Router } from '@angular/router';
+import { Experiencia } from 'src/app/modelos/experiencia';
+import { ExperienciaService } from 'src/app/servicios/experiencia.service';
 
 @Component({
   selector: 'app-modal-experiencia',
@@ -7,53 +10,59 @@ import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms'
   styleUrls: ['./modal-experiencia.component.css']
 })
 export class ModalExperienciaComponent implements OnInit {
-  form: FormGroup = new FormGroup({
-    img: new FormControl(''),
-    titulo: new FormControl(''),
-    subtitulo: new FormControl(''),
-    descripcion: new FormControl('')
-  });
+  form: FormGroup;
+    id?: number;
+    imagen! :  '';
+    titulo! :  '';
+    subtitulo! : '';
+    descripcion! : '';
+    experiencias: Experiencia[]=[];
+    trabajos: any;
 
-  constructor(private formBuilder: FormBuilder) {
+
+  constructor(private formBuilder: FormBuilder, private principalExperiencia:ExperienciaService, private ruta: Router) {
     this.form= this.formBuilder.group({
-      img:['',[Validators.required]],
+      id: [''],
+      imagen:['',[Validators.required]],
       titulo:['', [Validators.required, Validators.maxLength(40)]],
       subtitulo:['', [Validators.required,  Validators.maxLength(50)]],
-      descripcion:['', [Validators.required, Validators.minLength(20), Validators.maxLength(80)]],
+      descripcion:['', [Validators.required, Validators.minLength(20), Validators.maxLength(500)]],
    })}
   
-  ngOnInit(): void {}
-
-  get Img(){
-    return this.form.get("img");
+  ngOnInit(): void {
+    this.verExperiencia();
   }
 
-  get titulo(){
+  get Imagen(){
+    return this.form.get("imagen");
+  }
+
+  get Titulo(){
     return this.form.get("titulo");
    }
 
-   get subtitulo(){
+   get Subtitulo(){
     return this.form.get("subtitulo");
    }
 
-   get descripcion(){
+   get Descripcion(){
     return this.form.get("descripcion");
    }
 
-   get ImgValid(){
-     return this.Img?.touched && !this.Img?.valid;
+   get ImagenValid(){
+     return this.Imagen?.touched && !this.Imagen?.valid;
    }
 
-   get tituloValid() {
-     return this.titulo?.touched && !this.titulo?.valid;
+   get TituloValid() {
+     return this.Titulo?.touched && !this.Titulo?.valid;
    }
 
-   get subtituloValid() {
-    return this.subtitulo?.touched && !this.subtitulo?.valid;
+   get SubtituloValid() {
+    return this.Subtitulo?.touched && !this.Subtitulo?.valid;
   }
 
-  get descripcionValid() {
-    return this.descripcion?.touched && !this.descripcion?.valid;
+  get DescripcionValid() {
+    return this.Descripcion?.touched && !this.Descripcion?.valid;
   }
 
 
@@ -81,4 +90,84 @@ export class ModalExperienciaComponent implements OnInit {
       // También podríamos ejecutar alguna lógica extra
       alert("¡Sección eliminada!")
   }
+
+  onCreate(): void{
+    const expe = new Experiencia(this.titulo, this.subtitulo, this.descripcion, this.imagen);
+    this.principalExperiencia.create(expe).subscribe(data=>{
+      alert("");
+      window.location.reload();
+    }, err =>{
+      alert("Dato añadido");
+      this.form.reset();
+    });
+  }
+
+  verExperiencia(): void {
+    this.principalExperiencia.lista().subscribe(data => {
+      this.experiencias=data})
+  }
+
+  findExperiencia(id: number){
+    this.principalExperiencia.getById(id).subscribe({
+      next: (data) => {
+        this.form.setValue(data);
+      },
+      error: (e) => console.error(e),
+      complete: () => console.info('complete')
+    });
+    console.log("Dato cargado correctamente");
+  }
+
+  saveExpe() {
+    let expe = this.form.value;
+    if (expe.id == '') {
+      this.principalExperiencia.create(expe).subscribe({
+        next: (data) => {
+          this.reset();
+        },
+        error: (e) => console.error(e),
+        //complete: () => console.info('complete')
+      });
+      window.location.reload();
+      alert("Dato agregado correctamente");
+    } else {
+      this.principalExperiencia.edit(expe.id, expe).subscribe({
+        next: (data) => {
+          this.reset();
+        },
+        error: (e) => console.error(e),
+        //complete: () => console.info('complete')
+      });
+      window.location.reload();
+      alert("Dato modificado correctamente");
+    }
+  }
+
+  reset(): void {
+    this.form.reset();
+  }
+
+  delete(id:number){
+    if (id != undefined){
+      this.principalExperiencia.delete(id).subscribe(data=>{
+       this.verExperiencia();
+      }, err =>{
+        alert("Dato eliminado");
+        this.form.reset();
+      });
+  
+    }
+  }
+
+  
+limpiar(): void {
+  this.form.reset();
+}
+
+cerrar(): void {
+  window.location.reload();
+}
+
+
+
   }
