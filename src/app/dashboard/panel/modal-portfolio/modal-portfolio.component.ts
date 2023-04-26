@@ -22,8 +22,8 @@ export class ModalPortfolioComponent implements OnInit {
   constructor(private formBuilder: FormBuilder, private principalProyecto:ProyectoService) {
     this.form= this.formBuilder.group({
       id: [''],
-      titulo:['', [Validators.required, Validators.maxLength(40)]],
-      descripcion:[ '',[Validators.required, Validators.maxLength(100)]],
+      titulo:['', [Validators.required, Validators.maxLength(100)]],
+      descripcion:[ '',[Validators.required, Validators.maxLength(120)]],
       link:[ '',[Validators.required]],
    })
    }
@@ -150,10 +150,7 @@ export class ModalPortfolioComponent implements OnInit {
     }
   }
 
-  
-limpiar(): void {
-  this.form.reset();
-}
+
 
 cerrar(): void {
   window.location.reload();

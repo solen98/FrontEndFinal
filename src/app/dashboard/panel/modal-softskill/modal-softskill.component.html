@@ -40,7 +40,7 @@
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="exampleModal">Agregar Soft Skill</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" (click)="limpiar"></button>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" (click)="cerrar"></button>
       </div>
 
         <form [formGroup]="form" (ngSubmit)="form.valid && onCreate()"> 
@@ -51,7 +51,6 @@
                   <input type="text"class="form-control" placeholder="Título skill" [class.border-danger]="TituloValid" id="exampleInputEmail1" aria-describedby="emailHelp"  formControlName="titulo"  [(ngModel)]="titulo">
                   <div *ngIf="Titulo?.errors && Titulo?.touched">    
                     <p *ngIf="Titulo?.hasError('required')" class="error">Debes ingresar un título.</p>
-                    <p *ngIf="Titulo?.hasError('pattern')" class="error"> No puedes usar caracteres especiales ni números. </p>
                 </div>
                 </div>
               </div>
@@ -94,7 +93,6 @@
                   <input type="text"class="form-control" placeholder="Título skill" [class.border-danger]="TituloValid" id="titulo" formControlName="titulo" name="" >
                   <div *ngIf="Titulo?.errors && Titulo?.touched">    
                     <p *ngIf="Titulo?.hasError('required')" class="error">Debes ingresar un título.</p>
-                    <p *ngIf="Titulo?.hasError('pattern')" class="error"> No puedes usar caracteres especiales ni números. </p>
                 </div>
                 </div>
               </div>

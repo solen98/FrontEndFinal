@@ -147,10 +147,6 @@ verHardskill(): void {
   }
 
 
-limpiar(): void {
-  this.form.reset();
-}
-
 cerrar(): void {
   window.location.reload();
 }

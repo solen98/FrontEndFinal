@@ -42,7 +42,7 @@
       <div class="modal-content">
         <div class="modal-header">
           <h5 class="modal-title" id="exampleModal">Agregar proyecto</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" (click)="limpiar"></button>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" (click)="reset"></button>
         </div>
         <form [formGroup]="form"  (ngSubmit)="form.valid && onCreate()">   
         <div class="modal-body">
@@ -52,7 +52,7 @@
                 <input class="form-control" formControlName="titulo" type="text" placeholder="Título proyecto" [class.border-danger]="TituloValid" aria-label="default input example"  [(ngModel)]="titulo">
                 <div *ngIf="Titulo?.hasError && Titulo?.touched">  
                   <p *ngIf="Titulo?.hasError('required')" class="error"> Debes ingresar un título.</p> 
-                  <p *ngIf="Titulo?.hasError('maxlength')" class="error"> El límite máximo es de 40 caracteres. </p>
+                  <p *ngIf="Titulo?.hasError('maxlength')" class="error">  El límite máximo es de 100 caracteres. </p>
                 </div>
               </div>
             </div>
@@ -62,7 +62,7 @@
                 <textarea class="form-control" formControlName="descripcion" placeholder="Descripción proyecto"  [class.border-danger]="DescripcionValid" id="floatingTextarea"  [(ngModel)]="descripcion"></textarea>
                   <div *ngIf="Descripcion?.hasError && Descripcion?.touched">  
                     <p *ngIf="Descripcion?.hasError('required')" class="error"> Debes ingresar una descripción.</p> 
-                    <p *ngIf="Descripcion?.hasError('maxlength')" class="error"> El límite máximo es de 100 caracteres. </p>
+                    <p *ngIf="Descripcion?.hasError('maxlength')" class="error"> El límite máximo es de 120 caracteres. </p>
                   </div>
               </div>
             </div>
@@ -101,7 +101,7 @@
               <input class="form-control" formControlName="titulo" type="text" placeholder="Título proyecto" [class.border-danger]="TituloValid" id="titulo" formControlName="titulo">
               <div *ngIf="Titulo?.hasError && Titulo?.touched">  
                 <p *ngIf="Titulo?.hasError('required')" class="error"> Debes ingresar un título.</p> 
-                <p *ngIf="Titulo?.hasError('maxlength')" class="error"> El límite máximo es de 40 caracteres. </p>
+                <p *ngIf="Titulo?.hasError('maxlength')" class="error">  El límite máximo es de 100 caracteres. </p>
               </div>
             </div>
           </div>
@@ -111,7 +111,7 @@
               <textarea class="form-control" formControlName="descripcion" placeholder="Descripción proyecto"  [class.border-danger]="DescripcionValid" id="descripcion"  formControlName="descripcion"></textarea>
                 <div *ngIf="Descripcion?.hasError && Descripcion?.touched">  
                   <p *ngIf="Descripcion?.hasError('required')" class="error"> Debes ingresar una descripción.</p> 
-                  <p *ngIf="Descripcion?.hasError('maxlength')" class="error"> El límite máximo es de 100 caracteres. </p>
+                  <p *ngIf="Descripcion?.hasError('maxlength')" class="error"> El límite máximo es de 120 caracteres. </p>
                 </div>
             </div>
           </div>

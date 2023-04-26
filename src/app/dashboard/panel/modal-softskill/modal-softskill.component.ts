@@ -25,7 +25,7 @@ export class ModalSoftskillComponent implements OnInit {
     ///Creamos el grupo de controles para el formulario de login
     this.form= this.formBuilder.group({
       id: [''],
-      titulo:[ '', [Validators.required, Validators.pattern("[a-zA-ZñÑá-úÁ-Ú]*")]],
+      titulo:[ '', [Validators.required]],
       porcentaje:[ 0,[Validators.required, Validators.min(0),Validators.max(100) ]],
    })
   }
