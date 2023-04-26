@@ -7,7 +7,8 @@ import { Login } from '../modelos/login';
   providedIn: 'root'
 })
 export class LoginService {
-  url= "http://localhost:8080/login/"
+ // url= "http://localhost:8080/login/"
+  url= "https://portfolio-backend-final2.onrender.com/login/"
 
   constructor(private httpClient:HttpClient) { }
 

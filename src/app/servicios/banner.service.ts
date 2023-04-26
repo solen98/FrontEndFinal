@@ -7,7 +7,8 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class BannerService {
-  url= "http://localhost:8080/banner/"
+  //url= "http://localhost:8080/banner/"
+  url= "https://portfolio-backend-final2.onrender.com/banner/"
   constructor(private httpClient:HttpClient) { }
 
   public lista(): Observable<Banner[]>{

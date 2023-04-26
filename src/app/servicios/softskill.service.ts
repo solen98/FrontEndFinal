@@ -7,7 +7,9 @@ import { HttpClient } from '@angular/common/http';
   providedIn: 'root'
 })
 export class SoftskillService {
-  url= "http://localhost:8080/softskill/"
+  //url= "http://localhost:8080/softskill/"
+  url= "https://portfolio-backend-final2.onrender.com/softskill/"
+
   constructor(private httpClient:HttpClient) { }
 
   public lista(): Observable<Softskill[]>{

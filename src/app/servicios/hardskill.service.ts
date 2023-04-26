@@ -10,7 +10,9 @@ export class HardskillService {
   editarSkill(id: any, skills: any) {
     throw new Error('Method not implemented.');
   }
-  url= "http://localhost:8080/hardskill/"
+  //url= "http://localhost:8080/hardskill/"
+  url= "https://portfolio-backend-final2.onrender.com/hardskill/"
+
   constructor(private httpClient:HttpClient) { }
 
   public lista(): Observable<Hardskill[]>{

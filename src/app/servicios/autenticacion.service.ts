@@ -6,7 +6,8 @@ import { BehaviorSubject, map, Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class AutenticacionService {
-  url= "http://localhost:8080/sobremi/autenticacion/login"
+  //url= "http://localhost:8080/sobremi/autenticacion/login"
+  url= "https://portfolio-backend-final2.onrender.com/sobremi/autenticacion/login"
   currentUserSubject:BehaviorSubject<any>;
   sessionStorage: any; 
 

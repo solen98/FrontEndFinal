@@ -7,7 +7,8 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class RedesService {
-  url= "http://localhost:8080/redes/"
+  //url= "http://localhost:8080/redes/"
+  url= "https://portfolio-backend-final2.onrender.com/redes/"
 
   constructor(private httpClient:HttpClient) { }
 

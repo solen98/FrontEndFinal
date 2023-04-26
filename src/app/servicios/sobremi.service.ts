@@ -7,7 +7,9 @@ import { Sobremi } from '../modelos/sobremi';
   providedIn: 'root'
 })
 export class SobremiService {
-  url= "http://localhost:8080/sobremi/"
+  //url= "http://localhost:8080/sobremi/"
+  url= "https://portfolio-backend-final2.onrender.com/sobremi/"
+
   constructor(private httpClient:HttpClient) { }
 
   public lista(): Observable<Sobremi[]>{

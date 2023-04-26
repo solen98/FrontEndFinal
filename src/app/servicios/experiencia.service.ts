@@ -7,7 +7,9 @@ import { Experiencia } from '../modelos/experiencia';
   providedIn: 'root'
 })
 export class ExperienciaService {
- url= "http://localhost:8080/experiencia/"
+ //url= "http://localhost:8080/experiencia/"
+ url= "https://portfolio-backend-final2.onrender.com/experiencia/"
+
   constructor(private httpClient:HttpClient) { }
 
 
